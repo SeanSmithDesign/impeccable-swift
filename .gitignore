@@ -14,5 +14,8 @@ Packages/
 Package.resolved
 .swiftpm/
 
+# Exception: impeccable-lint is an executable package — track its lockfile for reproducibility.
+!tools/impeccable-lint/Package.resolved
+
 # Tooling scratch (hand-crafted smoke-test files left by dev loops)
 **/.scratch/
