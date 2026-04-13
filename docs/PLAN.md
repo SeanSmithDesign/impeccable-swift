@@ -202,7 +202,7 @@ sequenceDiagram
 
 ## Implementation Units
 
-- [ ] **Unit 1: Scaffold private repo + attribution + upstream pin**
+- [x] **Unit 1: Scaffold private repo + attribution + upstream pin**
 
 **Goal:** Create the `impeccable-swift` private GitHub repo with the full directory skeleton, license/attribution files, frontmatter templates, and a pinned upstream reference.
 
@@ -247,7 +247,7 @@ sequenceDiagram
 
 ---
 
-- [ ] **Unit 2: Port 8 upstream reference docs (parallel subagent dispatch)**
+- [x] **Unit 2: Port 8 upstream reference docs (parallel subagent dispatch)**
 
 **Goal:** Translate the eight upstream reference docs from CSS/React idiom to SwiftUI idiom, preserving Paul's voice (declare → why → rule → anti-pattern).
 
@@ -296,7 +296,7 @@ sequenceDiagram
 
 ---
 
-- [ ] **Unit 3: Author 4 new Swift-specific reference docs**
+- [x] **Unit 3: Author 4 new Swift-specific reference docs**
 
 **Goal:** Write reference docs for Apple-specific domains that have no upstream equivalent.
 
@@ -339,7 +339,7 @@ sequenceDiagram
 
 ---
 
-- [ ] **Unit 4: Author SKILL.md files for three skills**
+- [x] **Unit 4: Author SKILL.md files for three skills**
 
 **Goal:** Create the three skill entry points (`impeccable-swift`, `critique`, `polish`) with correct frontmatter and the two-layer read logic.
 
@@ -390,7 +390,7 @@ sequenceDiagram
 
 ---
 
-- [ ] **Unit 5: SwiftLint custom_rules `.swiftlint.yml`**
+- [x] **Unit 5: SwiftLint custom_rules `.swiftlint.yml`**
 
 **Goal:** Ship a drop-in SwiftLint config covering the line-regex tier of anti-patterns.
 
@@ -436,7 +436,7 @@ sequenceDiagram
 
 ---
 
-- [ ] **Unit 6: SwiftSyntax-based `impeccable-lint` CLI**
+- [x] **Unit 6: SwiftSyntax-based `impeccable-lint` CLI**
 
 **Goal:** Standalone Swift package providing AST-level anti-pattern checks that SwiftLint regex can't express.
 
@@ -487,7 +487,7 @@ sequenceDiagram
 
 ---
 
-- [ ] **Unit 7: Asset-catalog checker + SnapshotPreviews wiring**
+- [x] **Unit 7: Asset-catalog checker + SnapshotPreviews wiring**
 
 **Goal:** Complete the detection stack (asset-catalog check) and wire up visual review (SnapshotPreviews).
 
@@ -528,7 +528,7 @@ sequenceDiagram
 
 ---
 
-- [ ] **Unit 8: Evals directory + A/B protocol + sample briefs**
+- [x] **Unit 8: Evals directory + A/B protocol + sample briefs**
 
 **Goal:** Provide measurable proof-of-effect material for the POC launch. Borrowed from Paul's playbook.
 
@@ -574,7 +574,7 @@ sequenceDiagram
 
 ---
 
-- [ ] **Unit 9: Brakus integration + dogfood cycle**
+- [ ] **Unit 9: Brakus integration + dogfood cycle** — _deferred: overnight orchestrator run stopped at U8 per brief; daytime work requires live Brakus integration and a human dogfooder_
 
 **Goal:** Scaffold Brakus as an impeccable-swift consumer, use the skill to build one real feature, capture eval outputs, surface gaps.
 
@@ -621,7 +621,7 @@ sequenceDiagram
 
 ---
 
-- [ ] **Unit 10: Public POC flip + UPSTREAM review + release**
+- [ ] **Unit 10: Public POC flip + UPSTREAM review + release** — _deferred: blocked on U9 dogfood; public flip is a human decision gate_
 
 **Goal:** Flip the repo public, submit to `npx skills` if required, publish the v0.1.0-poc release.
 
