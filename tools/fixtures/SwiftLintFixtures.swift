@@ -1,5 +1,10 @@
 // SwiftLintFixtures.swift — impeccable-swift intentional-violations fixture.
 //
+// NOT MEANT TO COMPILE. This file is lint-input only. SwiftLint's custom_rules
+// match content via regex, so the intentional `UIColor(...)` call does not need
+// a working import to produce its violation. The `#if canImport(UIKit)` guard
+// below quiets Xcode's SourceKit red squiggles for humans browsing the file.
+//
 // Purpose: documentation-as-code. Every line labeled `// VIOLATION: <rule>`
 // should produce exactly one violation of the named custom rule when
 // `swiftlint lint --config ../.swiftlint.yml` runs against this file.
@@ -12,6 +17,9 @@
 // positional argument, which bypasses `excluded:` for explicit inputs.
 
 import SwiftUI
+#if canImport(UIKit)
+import UIKit
+#endif
 
 // MARK: - Violations
 
