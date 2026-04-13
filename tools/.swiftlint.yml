@@ -1,0 +1,98 @@
+# tools/.swiftlint.yml — impeccable-swift custom_rules (line-regex tier)
+# Docs: https://realm.github.io/SwiftLint/custom_rules.html
+#
+# Drop-in use:
+#   cp tools/.swiftlint.yml <your-project>/.swiftlint.yml
+#   swiftlint lint --config .swiftlint.yml
+#
+# Scope:
+#   `included:` controls which files SwiftLint scans. By default this config
+#   scans the current directory (`.`). Tune `included:` / `excluded:` for your
+#   project layout — typically you want to exclude test targets, generated
+#   code, Swift Package build products, and any intentional fixture files.
+#
+# Tiers:
+#   This file ships the *line-regex tier* only: cheap pattern matches that
+#   catch the common impeccable design violations. A future AST tier
+#   (SwiftSyntax-based, in tools/impeccable-lint) will catch multi-line cases
+#   that plain regex can't express without false positives.
+
+included:
+  - .
+
+excluded:
+  - tools/fixtures
+  - tools/impeccable-lint/Tests
+  - .build
+  - Packages
+  - DerivedData
+  - .swiftpm
+
+only_rules:
+  - custom_rules
+
+custom_rules:
+  no_hardcoded_hex_color:
+    name: "No hardcoded hex color"
+    # Negative lookbehind prevents matching `UIColor(` / `NSColor(`, which
+    # are handled by the stricter error rule `no_uikit_nskit_color_literal`.
+    regex: '(?<!UI)(?<!NS)Color\(\s*(?:red|hex)\s*:'
+    message: "Use Asset Catalog semantic color, not hardcoded hex. See impeccable/reference/color-and-contrast.md."
+    severity: error
+
+  no_uikit_nskit_color_literal:
+    name: "No UIKit/AppKit color literal"
+    regex: '(?:UIColor|NSColor)\(\s*(?:red|hex|white|displayP3Red)\s*:'
+    message: "Hardcoded platform color. Use Asset Catalog semantic color."
+    severity: error
+
+  no_fixed_system_font_size:
+    name: "No fixed system font size"
+    regex: '\.font\(\s*\.system\(\s*size\s*:'
+    message: "Fixed-pt body text breaks Dynamic Type. Use `.font(.body)`, semantic styles, or `@ScaledMetric`."
+    severity: error
+
+  no_magic_spacing_padding:
+    name: "No magic spacing (.padding)"
+    regex: '\.padding\(\s*(?!(?:4|8|12|16|20|24|32|44|64)\s*\))\d+(?:\.\d+)?\s*\)'
+    message: "Magic spacing. Stay on the 4pt scale (4, 8, 12, 16, 20, 24, 32, 44, 64)."
+    severity: warning
+
+  no_magic_spacing_frame:
+    name: "No magic spacing (.frame width/height)"
+    regex: '\.frame\([^)]*(?:width|height)\s*:\s*(?!(?:4|8|12|16|20|24|32|44|64)\b)\d+(?:\.\d+)?'
+    message: "Magic spacing. Stay on the 4pt scale (4, 8, 12, 16, 20, 24, 32, 44, 64)."
+    severity: warning
+
+  continuous_corner_required:
+    name: "Continuous corner required"
+    # Matches `cornerRadius: N)` where the call closes with no `.continuous`
+    # style argument. The `.continuous` case has a comma after the number,
+    # so this regex skips it cleanly.
+    regex: 'cornerRadius\s*:\s*\d+(?:\.\d+)?\s*\)'
+    message: "Use `.continuous` corner style for superellipse. See impeccable/reference/spatial-design.md."
+    severity: warning
+
+  no_literal_system_color:
+    name: "No literal system color"
+    regex: '\.foregroundColor\(\s*\.(?:blue|red|green|yellow|orange|purple|pink|gray|brown|cyan|indigo|mint|teal|black|white)\s*\)'
+    message: "Hardcoded system color. Use Asset Catalog semantic color."
+    severity: warning
+
+  no_print_in_production:
+    name: "No print() in production"
+    regex: '(?<!\w)print\('
+    message: "`print()` calls leak to production. Use a proper logger (os.Logger)."
+    severity: warning
+
+  prefer_sf_symbols_comment:
+    name: "Prefer SF Symbols over bundled bitmaps"
+    regex: 'Image\(\s*"[^"]+\.(?:png|jpg|jpeg)"'
+    message: "Prefer SF Symbols over bundled PNGs/JPGs where available. See impeccable/reference/sf-symbols.md. Full check via tools/asset-catalog-checker."
+    severity: warning
+
+  no_framed_sf_symbol:
+    name: "No framed SF Symbol"
+    regex: 'Image\(\s*systemName\s*:[^)]+\)\s*\.frame\('
+    message: "Size SF Symbols with `.font()` or `.imageScale()`, not `.frame()`. See impeccable/reference/sf-symbols.md."
+    severity: warning
