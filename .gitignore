@@ -13,3 +13,6 @@ xcuserdata/
 Packages/
 Package.resolved
 .swiftpm/
+
+# Tooling scratch (hand-crafted smoke-test files left by dev loops)
+**/.scratch/
