@@ -33,10 +33,10 @@
 		AA000001000000000000007B /* Attachment.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Attachment.swift; sourceTree = "<group>"; };
 		AA000001000000000000008B /* ReplyThread.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReplyThread.swift; sourceTree = "<group>"; };
 		AA000001000000000000009B /* SampleData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SampleData.swift; sourceTree = "<group>"; };
-		AA00000100000000000000AB /* Build1ChatConversationView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatConversationView.swift; sourceTree = "<group>"; };
-		AA00000100000000000000BB /* Build2ChatConversationView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatConversationView.swift; sourceTree = "<group>"; };
-		AA00000100000000000000CB /* Build3ChatConversationView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatConversationView.swift; sourceTree = "<group>"; };
-		AA00000100000000000000DB /* Build4ChatConversationView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatConversationView.swift; sourceTree = "<group>"; };
+		AA00000100000000000000AB /* Build1ChatConversationView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Build1ChatConversationView.swift; sourceTree = "<group>"; };
+		AA00000100000000000000BB /* Build2ChatConversationView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Build2ChatConversationView.swift; sourceTree = "<group>"; };
+		AA00000100000000000000CB /* Build3ChatConversationView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Build3ChatConversationView.swift; sourceTree = "<group>"; };
+		AA00000100000000000000DB /* Build4ChatConversationView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Build4ChatConversationView.swift; sourceTree = "<group>"; };
 		AA00000100000000000000EB /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		AA00000100000000000000FB /* ChatBenchmark.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = ChatBenchmark.app; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */

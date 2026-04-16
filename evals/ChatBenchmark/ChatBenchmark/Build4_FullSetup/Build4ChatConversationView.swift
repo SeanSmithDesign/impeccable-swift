@@ -23,7 +23,7 @@ import SwiftUI
 // MARK: - Accent color token (DESIGN.md: accent #c97350)
 private extension Color {
     // DESIGN.md: accent #c97350 — warm rust / terracotta
-    static let accent = Color(red: 0.788, green: 0.451, blue: 0.314)
+    static let terracotta = Color(red: 0.788, green: 0.451, blue: 0.314)
 }
 
 // MARK: - Spacing tokens (DESIGN.md: rhythm 4/8/12/16/24)
@@ -219,7 +219,7 @@ struct Build4ChatConversationView: View {
                             // DESIGN.md: .caption2 in accent color
                             Text(preview.sourceLabel)
                                 .font(.caption2)
-                                .foregroundStyle(Color.accent)
+                                .foregroundStyle(Color.terracotta)
                         }
                     }
                 }
@@ -293,12 +293,12 @@ struct Build4ChatConversationView: View {
                     // DESIGN.md: doc.fill symbol, .semibold for action glyphs
                     Image(systemName: attachment.systemSymbolName)
                         .font(.title3.weight(.semibold))
-                        .foregroundStyle(Color.accent)  // DESIGN.md: accent sparingly
+                        .foregroundStyle(Color.terracotta)  // DESIGN.md: accent sparingly
                         .frame(width: 40, height: 40)
                         .background(
                             // spatial-design.md: concentric corners (14 outer - 6 pad = 8 inner)
                             RoundedRectangle(cornerRadius: 8, style: .continuous)
-                                .fill(Color.accent.opacity(0.1))
+                                .fill(Color.terracotta.opacity(0.1))
                         )
                     VStack(alignment: .leading, spacing: 2) {
                         // DESIGN.md: .subheadline, lineLimit(1), .truncationMode(.middle)
@@ -380,7 +380,7 @@ struct Build4ChatConversationView: View {
                         Text("\(thread.replies.count) replies")
                             .font(.footnote.weight(.medium))
                     }
-                    .foregroundStyle(Color.accent)  // DESIGN.md: accent for active reply affordance
+                    .foregroundStyle(Color.terracotta)  // DESIGN.md: accent for active reply affordance
                     .frame(minHeight: replyChipHeight)
                     .padding(.horizontal, Space.xs)
                 }
@@ -454,7 +454,7 @@ struct Build4ChatConversationView: View {
                 Image(systemName: canSend ? "arrow.up.circle.fill" : "arrow.up.circle")
                     .font(.title2.weight(.semibold))
                     // DESIGN.md: accent as send-button fill when enabled
-                    .foregroundStyle(canSend ? Color.accent : Color.secondary)
+                    .foregroundStyle(canSend ? Color.terracotta : Color.secondary)
             }
             // DESIGN.md + interaction-design.md: custom ButtonStyle with pressed state
             .buttonStyle(SendButtonStyle(isEnabled: canSend))
@@ -480,7 +480,7 @@ struct Build4ChatConversationView: View {
         if isMe {
             // DESIGN.md: sent bubble = accent color with white text
             RoundedRectangle(cornerRadius: 18, style: .continuous)  // DESIGN.md: 18pt .continuous
-                .fill(Color.accent)
+                .fill(Color.terracotta)
         } else {
             // DESIGN.md: received bubble = .regularMaterial
             RoundedRectangle(cornerRadius: 18, style: .continuous)
