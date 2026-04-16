@@ -64,7 +64,7 @@
 				AA000001000000000000016A /* Build4_FullSetup */,
 				AA00000100000000000000EB /* Assets.xcassets */,
 			);
-			path = ChatBenchmark;
+			path = ChatBenchmarkV2;
 			sourceTree = "<group>";
 		};
 		AA000001000000000000012A /* Models */ = {
