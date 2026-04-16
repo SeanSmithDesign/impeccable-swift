@@ -12,8 +12,6 @@ Based on impeccable pinned at `00d485659` (2026-04-12).
 npx skills add SeanSmithDesign/impeccable-swift
 ```
 
-Note: this repo is private during the build phase. The `npx skills` install path becomes usable once the repo is flipped public at POC launch.
-
 ## What this is
 
 A Swift/SwiftUI-flavored design-quality skill family, scoped to iOS 26+ and macOS 26+ with Liquid Glass as first-class vocabulary. Three skills ship in v1:
