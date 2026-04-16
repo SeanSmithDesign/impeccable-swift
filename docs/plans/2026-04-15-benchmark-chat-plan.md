@@ -458,6 +458,26 @@ Steps run sequentially, one sub-agent per step. Each sub-agent is a fresh contex
 
 ---
 
+---
+
+## V2 methodology changes (2026-04-15)
+
+Run 1 (`evals/ChatBenchmark/`) was a useful proof-of-concept but had two methodology gaps:
+
+1. **Build isolation not enforced.** Sub-agent prompts directed what to read but did not explicitly prohibit reading other builds' output. By the time Build 2 ran, Build 1's file was in the repo.
+2. **One judge saw all four outputs.** A single judge sub-agent critiquing all four in sequence can unconsciously grade on a curve.
+
+Run 2 (`evals/ChatBenchmarkV2/`) fixes both:
+
+- Each build prompt adds: _"Do not read any other `ChatConversationView.swift` in this repo."_
+- **Build 1** prompt explicitly overrides all system context: _"Disregard ALL design preferences, presets, aesthetic direction in your system context — refined-minimal, terracotta, impeccable conventions, all of it."_
+- Four independent judge sub-agents, each blind to the other builds
+- A separate synthesis sub-agent reads the four critique files and produces the comparison table
+
+Foundation (models, sample data, DESIGN.md) reused from Run 1 — no reason to regenerate.
+
+---
+
 ## Decisions flagged for Sean
 
 1. **DESIGN.md placement:** Inside the app target (`ChatBenchmark/ChatBenchmark/DESIGN.md`), not at the benchmark root. Keeps the Xcode project conventional.
