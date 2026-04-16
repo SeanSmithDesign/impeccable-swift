@@ -111,6 +111,85 @@ NavigationStack(path: $path) {
 
 **On iPadOS, contextual menus belong in popovers, not sheets.** A sheet darkens the whole screen and demands full attention; a popover anchors to the trigger and preserves context. Reserve sheets for discrete tasks (compose, checkout, onboarding) — everything else is a popover. `.popover` anchors correctly on iPad and Mac and falls back to a sheet on iPhone automatically.
 
+## Modal Depth: One Layer at a Time
+
+**Declare: never present a sheet from inside a sheet. If a task needs sub-navigation inside a modal, push onto a `NavigationStack` inside the sheet — don't add another `.sheet`.**
+
+**Why:** A user inside a second-level sheet has no reliable gesture to dismiss both. Swipe-to-dismiss removes only the top sheet, stranding them inside the first. There is no system back gesture that cascades through modal layers. The user is trapped with no obvious exit.
+
+The HIG rule: one active modal at a time. Two is the outer limit, and only for clearly separated contexts (e.g., a share sheet triggered from inside a compose view). If you find yourself writing `.sheet` inside a `.sheet` body, that's the signal to use `NavigationStack` instead.
+
+```swift
+// WRONG — sheet presenting sheet
+ProfileView()
+    .sheet(isPresented: $showEditAvatar) {
+        AvatarEditor()  // Second modal layer — user now has no exit
+    }
+
+// CORRECT — sub-navigation inside a sheet stays on a stack
+.sheet(isPresented: $showProfile) {
+    NavigationStack {
+        ProfileView()
+            .navigationDestination(for: ProfileRoute.self) { route in
+                view(for: route)  // Push, don't modal
+            }
+    }
+}
+```
+
+## Sheet vs. fullScreenCover
+
+**Declare: use `.sheet` for self-contained tasks where the user should retain context awareness. Use `.fullScreenCover` only for immersive experiences that require total visual focus.**
+
+**Why:** `.sheet` partially covers the presenting view — the user can see (and be reminded of) where they came from. `.fullScreenCover` completely hides the presenting context and has no swipe-to-dismiss by default, so it requires an explicit dismiss mechanism. Reaching for `.fullScreenCover` to avoid thinking about sheet sizing is the wrong reason.
+
+Use `.sheet` for: settings panels, quick compose, filter pickers, onboarding flows.
+Use `.fullScreenCover` for: camera, media playback, full-screen onboarding with video, any experience where showing the background would break immersion.
+
+```swift
+// Sheet — user retains context awareness
+.sheet(isPresented: $showCompose) {
+    ComposeView()
+        .presentationDetents([.medium, .large])
+        .presentationDragIndicator(.visible)
+}
+
+// fullScreenCover — camera needs total visual focus
+.fullScreenCover(isPresented: $showCamera) {
+    CameraView()
+}
+```
+
+**Anti-pattern — "The fullScreenCover Escape Hatch":**
+
+```swift
+// WRONG — fullScreenCover for a settings form
+.fullScreenCover(isPresented: $showSettings) {
+    SettingsView()
+    // No reason to cover the full screen — use .sheet with .large detent
+}
+```
+
+## Sheet Sizing with presentationDetents
+
+**Declare: use `presentationDetents([.medium, .large])` when the sheet's content fits in half the screen without scrolling. Default to `.large` for content-heavy sheets.**
+
+**Why:** `.medium` puts the sheet at approximately half-screen height. If the primary content requires scrolling inside a `.medium` sheet, the sheet is the wrong size for the content — use `.large` or offer both and let the user resize. Forcing scroll inside a half-height sheet is a friction error.
+
+```swift
+.sheet(isPresented: $showFilter) {
+    FilterPanel()
+        .presentationDetents([.medium, .large])  // User can drag between sizes
+        .presentationDragIndicator(.visible)       // Show the drag indicator explicitly
+}
+
+// Content-heavy sheet — start at large, let user pull down to medium
+.sheet(isPresented: $showCompose) {
+    ComposeView()
+        .presentationDetents([.large, .medium])    // Large is default (first in array)
+}
+```
+
 ---
 
-**Avoid:** `NavigationStack` as the root on apps that ship to iPad. Hardcoded toolbar placements. Implicit title display modes. Manual safe-area padding. String-based navigation routes. Sheets where popovers belong on iPad.
+**Avoid:** `NavigationStack` as the root on apps that ship to iPad. Hardcoded toolbar placements. Implicit title display modes. Manual safe-area padding. String-based navigation routes. Sheets where popovers belong on iPad. `.sheet` inside `.sheet`. `.fullScreenCover` for non-immersive content. `.medium` detent when content requires scrolling.

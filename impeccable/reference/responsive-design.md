@@ -154,6 +154,58 @@ struct PhotoGrid: View {
 }
 ```
 
+## presentationCompactAdaptation — Control Popover Fallback Explicitly
+
+**Declare: when a `.popover` must behave differently in compact environments than the default sheet fallback, use `presentationCompactAdaptation` to state that explicitly. Never use `.none` on content-heavy popovers.**
+
+**Why:** `.popover` automatically adapts to a `.sheet` on iPhone (horizontally compact). This default is usually correct — popovers require space to anchor to their source without covering the screen, and iPhone doesn't have that space. But there are cases where the default is wrong: a small color picker that genuinely fits on iPhone without a full sheet, or a detented sheet that needs to stay detented even in landscape compact.
+
+The four `PresentationAdaptation` values:
+
+- `.automatic` — platform default (popover → sheet on compact). Usually correct; prefer this.
+- `.none` — keep the popover as a popover in compact. Only valid for genuinely small, self-contained panels (color pickers, emoji selectors). Never use on content requiring scroll.
+- `.sheet` — explicitly adapt to a sheet. Use when you need `presentationDetents` on the compact version.
+- `.fullScreenCover` — adapt to full-screen cover. Rare.
+
+```swift
+// Small self-contained panel — stays as popover on iPhone
+Button("Color") { showPicker = true }
+    .popover(isPresented: $showPicker) {
+        ColorPickerContent()
+            .frame(width: 280, height: 320)
+            .presentationCompactAdaptation(.none)
+    }
+
+// Popover that explicitly becomes a detented sheet on iPhone
+Button("Filter") { showFilter = true }
+    .popover(isPresented: $showFilter) {
+        FilterPanel()
+            .presentationDetents([.medium, .large])
+            .presentationCompactAdaptation(.sheet)
+    }
+
+// Prevent a detented sheet from expanding to full-screen cover in landscape iPhone
+.sheet(isPresented: $showFilter) {
+    FilterPanel()
+        .presentationDetents([.medium, .large])
+        .presentationCompactAdaptation(.none)  // Stay detented, don't full-screen in landscape
+}
+
+// Different adaptations per dimension
+.presentationCompactAdaptation(horizontal: .sheet, vertical: .none)
+```
+
+**Anti-pattern — "The Suppressed Adaptation":**
+
+```swift
+// WRONG — suppressing adaptation on a content-heavy popover
+.popover(isPresented: $showMenu) {
+    FullMenuView()              // Long scrollable content
+        .presentationCompactAdaptation(.none)
+    // On iPhone: partially covers content, no clear dismiss gesture, content clips
+}
+```
+
 ## Orientation Is a Weak Signal
 
 **Declare: design to size classes, not to `UIDevice.orientation`.** An iPhone in landscape might be `.compact` height and `.regular` width; an iPad in portrait is usually `.regular` × `.regular`. Orientation alone tells you nothing useful.

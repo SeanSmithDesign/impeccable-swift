@@ -12,7 +12,7 @@ Critique surfaces design violations in existing SwiftUI code with rule citations
 
 Follow the Context Gathering Protocol in `../impeccable/SKILL.md` before scanning. That means:
 
-- Read all 12 reference docs under `impeccable/reference/`.
+- Read all 13 reference docs under `impeccable/reference/`.
 - Read the project's `DESIGN.md` at the repo root.
 - Apply the two-layer precedence: project tokens override universal defaults where explicit; universal rules apply where the project is silent; Apple HIG is the final tiebreaker.
 - If `DESIGN.md` is missing, run universal-only. If unparseable, warn once and continue.
