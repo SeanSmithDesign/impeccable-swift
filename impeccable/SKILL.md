@@ -12,10 +12,11 @@ license: Apache 2.0. Based on Paul Bakaus's impeccable. See NOTICE.md.
 
 Before writing or reviewing any SwiftUI, you MUST load the project's design context in this order. Skipping this step is how you produce generic output.
 
-### Step 1: Read the 12 reference docs
+### Step 1: Read the 13 reference docs
 
-All twelve live under `impeccable/reference/`. Read each before acting — they are the universal rules this skill enforces:
+All thirteen live under `impeccable/reference/`. Read each before acting — they are the universal rules this skill enforces:
 
+- `accessibility.md` — VoiceOver labels, traits, Reduce Motion, Reduce Transparency, Switch Control.
 - `color-and-contrast.md` — system colors, semantic roles, Dark Mode, accessibility contrast.
 - `craft.md` — the shape → reference → build → iterate loop; tone and voice for this skill.
 - `interaction-design.md` — gestures, haptics, focus, loading and empty states.
@@ -50,6 +51,60 @@ Look at the repo root for `DESIGN.md`. This is where each project declares its o
 - **One symbol set per surface.** Mixing SF Symbols weights or swapping in third-party icon packs is a tell.
 - **Named anti-patterns beat generic advice.** The reference docs call violations by name — cite them.
 - **Apple HIG is the tiebreaker.** When in doubt, do what the system does.
+
+## The SwiftUI Reflex Check
+
+The model's natural failure mode in SwiftUI is identical to its failure mode in web design: it reaches for trained defaults and produces output that looks like every beginner tutorial. The following procedure forces enumeration before generation.
+
+**Run this before writing any SwiftUI view — not after.**
+
+**Step 1.** Write down 3 words for what this screen should feel like in use. Not "clean" or "modern" — those are dead words. Something like: "focused and unhurried and a little ceremonial", "fast and dense and dismissible", "warm and tactile and forgiving".
+
+**Step 2.** List the first 3 layout and surface decisions you would make. Write them down explicitly. They are most likely from this list:
+
+<reflex_swiftui_patterns_to_reject>
+Surface defaults:
+
+- `.background(Color(.systemBackground))` — no material, no depth declaration
+- White card with `cornerRadius(10)` and `shadow(radius: 4)` — the AI SwiftUI card
+- Flat `VStack` of identical rows with a `Divider()` between them
+
+Layout defaults:
+
+- `List` for every scrolling collection regardless of visual intent
+- `VStack { ForEach { HStack { ... } } }` as the only layout pattern
+- Every section uses the same padding value (no hierarchy through spacing)
+
+Typography defaults:
+
+- `.title` + `.body` + `.caption` at system weight defaults, no contrast variation
+- Every header the same weight, every body the same style
+- No numeric formatting (raw integers, not `.monospacedDigit()` for time/counts)
+
+Color defaults:
+
+- `.accentColor` as the only brand expression
+- No semantic color tokens — hardcoded Color values everywhere
+- Dark Mode never considered beyond system `.primary`/`.secondary`
+
+Interaction defaults:
+
+- No custom `ButtonStyle` — system default press behavior on every tappable element
+- No `.sensoryFeedback` on any completion, error, or selection state
+- No `ContentUnavailableView` — empty collections just show nothing
+
+Material defaults:
+
+- No `Material` on any surface, even floating overlays
+- Custom `Color.white.opacity(0.8)` + `.blur()` instead of system materials
+- No `GlassEffectContainer` for related floating controls on iOS 26+
+  </reflex_swiftui_patterns_to_reject>
+
+**Step 3.** For any item in your Step 2 list that matches the reflex list: stop and find the system alternative or a more intentional choice. The reflex choice is not always wrong — but it must be a deliberate decision, not a default.
+
+**Step 4.** Cross-check the result. Ask: does this layout look like a SwiftUI tutorial screenshot? Does every card look the same? Is the only design decision "light background, SF Pro, blue accent"? If yes, go back to Step 3.
+
+The goal is not to be weird. The goal is to be intentional. A plain `List` is correct when a plain `List` is the right choice — but the model must be able to name _why_, not just reach for it.
 
 ## Commands available
 

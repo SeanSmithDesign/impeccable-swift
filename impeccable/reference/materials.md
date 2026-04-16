@@ -23,6 +23,44 @@ GlassEffectContainer {
 
 **Why:** Glass is not decoration — it's a depth declaration. The blur reads "this is above." The edge highlight reads "this is bounded." Skipping it and hand-rolling a white-rect-with-shadow tells the user the surface is printed onto the background instead of hovering over it.
 
+## Regular vs. Clear — Two Glass Variants
+
+**Declare: choose `.regular` for glass surfaces with significant text or controls; choose `.clear` only for surfaces floating above visually rich media backgrounds.**
+
+Liquid Glass has two variants with different optical properties:
+
+- **`.regular`** — blurs and adjusts the luminosity of background content to maintain legibility. Most system components (sidebars, tab bars, alerts, popovers) use this. Use it when background content might create legibility issues or when the glass surface contains a significant amount of text.
+- **`.clear`** — highly translucent. Prioritizes the visibility of underlying content — background detail stays prominent and immersive. Use it only for surfaces floating above photos, videos, or other media. The content behind it must be the star.
+
+```swift
+// Regular — toolbar over scrollable content
+.glassEffect(Glass.regular, in: .capsule)
+
+// Clear — floating control over a photo viewer
+.glassEffect(Glass.clear, in: .capsule)
+```
+
+**Dimming layer rule for clear glass:** Clear glass over bright backgrounds loses legibility. When the underlying content is bright, add a dark dimming layer at 35% opacity behind the glass surface. If the content is sufficiently dark, or if you're using AVKit's media controls (which include their own dimming layer), skip the dimming layer.
+
+```swift
+// Clear glass over potentially bright content — add a dimming layer
+ZStack {
+    Color.black.opacity(0.35)  // Dimming layer for legibility
+    controlContent
+}
+.glassEffect(Glass.clear, in: .capsule)
+```
+
+## Glass Is For Floating Chrome, Not Content Layer
+
+**Declare: never apply `.glassEffect()` to elements in the content layer.** Glass establishes the functional layer (controls, navigation) floating above the content layer (what the app is actually about). Mixing them collapses the hierarchy.
+
+**Why:** Apple's HIG is explicit: "Don't use Liquid Glass in the content layer. Including it in the content layer can result in unnecessary complexity and a confusing visual hierarchy." The distinction is structural — glass says "I am chrome." Content says "I am what the user came for."
+
+**Exception:** Sliders and toggles inside the content layer take on a glass appearance when activated — this is system behavior, not something to replicate on custom controls.
+
+**Anti-pattern — "The cargo-cult Glass."** Every view gets `.glassEffect()` because glass looks modern. List rows become glass. Cards become glass. The hierarchy collapses. Before applying glass, ask: does this surface genuinely float above content the user is reading? If no, use a plain background or a standard `Material`.
+
 ## Materials Declare Hierarchy, Not Mood
 
 **Stop treating materials as a vibe toggle.** `.regularMaterial`, `.thinMaterial`, `.ultraThinMaterial`, `.thickMaterial`, and `.ultraThickMaterial` are a ranked scale that encodes _how much the surface separates from what's behind it_. Thicker = more separation = higher in the visual stack. Pick by relationship, not by taste.
@@ -74,10 +112,6 @@ RoundedRectangle(cornerRadius: 16, style: .continuous)
 ```
 
 **Rule:** Always use `.continuous` corner style — Apple's squircle — not the default circular corner. And compute inner radii against outer radii minus padding. If the math goes negative, the inner surface shouldn't be rounded at all.
-
-## Glass Is For Floating, Not For Everything
-
-**Anti-pattern — "The cargo-cult Glass."** Every view gets `.glassEffect()` because glass looks modern. Body content becomes glass. List rows become glass. Buttons buried inside cards become glass. The hierarchy collapses — if every surface is elevated, nothing is elevated, and the system's depth cue becomes noise. Glass is for surfaces that actually hover above content. Everything else is opaque or uses `.background` / `Material`.
 
 **Rule:** Before applying `.glassEffect()`, answer: does this surface genuinely float above content the user is reading or scrolling through? If no, use a plain background. If yes, wrap it in `GlassEffectContainer` with siblings so they read as one pane.
 

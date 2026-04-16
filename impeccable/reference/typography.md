@@ -16,6 +16,28 @@ Text("12 min read").font(.footnote).foregroundStyle(.secondary)
 
 **Cardinal sin: fixed-pt body text.** `.font(.system(size: 15))` looks fine in the simulator and breaks the moment a user bumps their Dynamic Type setting. If you find yourself reaching for a numeric size, stop — pick the semantic style that matches the role. The only places a fixed size is defensible are single-character icons inside a fixed badge, and numbers inside a tight data visualization where wrapping would break the chart.
 
+## The 11-Style Reference Table
+
+Assign by role, not by the size you want. The size is a consequence of the role.
+
+| Style          | Default Size | Weight       | Use for                                                      |
+| -------------- | ------------ | ------------ | ------------------------------------------------------------ |
+| `.largeTitle`  | 34pt         | Regular      | Navigation bar large title; top-of-screen primary title      |
+| `.title`       | 28pt         | Regular      | First-level heading within a view                            |
+| `.title2`      | 22pt         | Regular      | Second-level heading                                         |
+| `.title3`      | 20pt         | Regular      | Third-level heading, subpage titles                          |
+| `.headline`    | 17pt         | **Semibold** | List row primary label, card header — semibold at body scale |
+| `.body`        | 17pt         | Regular      | Primary reading text; the default for most content           |
+| `.callout`     | 16pt         | Regular      | Slightly smaller body; secondary content in cards, sidebars  |
+| `.subheadline` | 15pt         | Regular      | Supporting text under a headline; metadata rows              |
+| `.footnote`    | 13pt         | Regular      | Supplementary info, timestamps, source attribution           |
+| `.caption`     | 12pt         | Regular      | Image captions, form field labels below inputs               |
+| `.caption2`    | 11pt         | Regular      | The smallest style — badges, micro-labels. Use sparingly.    |
+
+`.headline` and `.body` render at the same 17pt default but differ in weight. Never use both in the same hierarchy level — the difference is weight, not scale, so they signal emphasis within the same tier, not a tier change.
+
+At Accessibility5 (maximum), `.largeTitle` reaches ~56pt and `.caption2` reaches ~20pt. Layouts must accommodate this range. Use `ScrollView` on content that will overflow, and never assume text fits in a fixed-height container.
+
 ## @ScaledMetric for Custom Sizes
 
 When a design calls for a size the semantic styles don't offer — a hero display type at 56pt, a condensed metric at 13pt — use `@ScaledMetric`. It scales your custom value proportionally with the user's Dynamic Type setting.
@@ -36,6 +58,44 @@ struct HeroHeadline: View {
 `relativeTo:` anchors your custom size to the closest semantic style, so it scales on the same curve as other text of that role. A 56pt hero pinned to `.largeTitle` grows at the same rate as the OS's own large title — the hierarchy holds at every Dynamic Type level.
 
 Clamp with `.dynamicTypeSize(...DynamicTypeSize.accessibility3)` only when a specific layout genuinely cannot accommodate larger sizes (a navigation bar, a dense table cell). Never clamp the whole app. The user set that preference for a reason.
+
+## Single-Line Labels: minimumScaleFactor and Truncation
+
+**Declare: any label constrained to one line pairs `.lineLimit(1)` with `.minimumScaleFactor(0.75)`.** Without `lineLimit`, `minimumScaleFactor` has no effect — text just wraps. Without `minimumScaleFactor`, text truncates at default size instead of shrinking first.
+
+**Why:** Labels in navigation bars, tab items, and compact cells cannot wrap. At larger Dynamic Type sizes, the text needs somewhere to go — shrink first, truncate only when shrinking hits the floor. A floor of 0.75 is the practical minimum: below that, text becomes unreadable at normal accessibility sizes.
+
+```swift
+// Navigation bar title that must stay on one line
+Text(document.name)
+    .font(.headline)
+    .lineLimit(1)
+    .minimumScaleFactor(0.75)
+    .truncationMode(.tail)
+
+// Tab label — compact space, must not wrap
+Text("Messages")
+    .font(.caption2)
+    .lineLimit(1)
+    .minimumScaleFactor(0.8)
+```
+
+**Anti-pattern — "The Silent Truncation":**
+
+```swift
+// WRONG — lineLimit without minimumScaleFactor
+Text(document.name)
+    .font(.headline)
+    .lineLimit(1)
+// At Accessibility Large, this truncates to two characters and "…"
+// .minimumScaleFactor(0.75) would have let it shrink and stay readable
+
+// WRONG — minimumScaleFactor without lineLimit
+Text(document.name)
+    .font(.headline)
+    .minimumScaleFactor(0.75)
+// Has no effect — text wraps to a second line instead of shrinking
+```
 
 ## Weight Discipline
 

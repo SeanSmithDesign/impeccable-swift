@@ -216,24 +216,59 @@ struct FormField: View {
 
 ## Haptics Are a State Signal, Not Decoration
 
-**Declare: use `.sensoryFeedback` to confirm success, error, and discrete selection changes — nothing else.** A haptic on every button tap trains users to ignore haptics.
+**Declare: map haptic type to semantic outcome — not to "this interaction feels important."** A haptic on every button tap trains users to ignore haptics.
 
-**Why:** Haptics are a scarce communication channel. Spend them on moments that genuinely warrant acknowledgement: a successful submit, a failed validation, a selection snapping into place. A tap that already has a visible pressed state and a clear outcome does not need one.
+**Why:** The haptic vocabulary is narrow and intentional. Spending `.success` on a tap that doesn't complete anything meaningful depletes the signal. Once users learn to ignore haptics, you've lost the channel entirely.
+
+The three semantic clusters of `SensoryFeedback` (iOS 17+):
+
+**Outcome** — use when an async operation completes with a result:
+
+- `.success` — task completed successfully
+- `.warning` — task completed with a caveat
+- `.error` — task failed
+
+**Selection / change** — use when a discrete value moves:
+
+- `.selection` — picker, slider, drag-to-reorder (plays on iOS and watchOS)
+- `.alignment` — snap-to-grid, object alignment in a canvas
+
+**Physical impact** — use when two visual objects collide:
+
+- `.impact(weight:intensity:)` — card snap, drag-to-slot, pull-to-refresh threshold
+- `.impact(flexibility:intensity:)` — when the quality of the collision matters more than mass
+
+**Critical platform note:** `.increase` and `.decrease` play only on watchOS/visionOS — not on iOS. Attaching them to a slider on iPhone fires no feedback. `.levelChange` plays only on macOS.
 
 ```swift
-struct FavoriteButton: View {
-    @State private var isFavorite = false
+// Outcome — async operation completes
+.sensoryFeedback(.success, trigger: uploadComplete) { _, new in new == true }
+.sensoryFeedback(.error, trigger: uploadError) { _, new in new != nil }
 
-    var body: some View {
-        Button {
-            isFavorite.toggle()
-        } label: {
-            Image(systemName: isFavorite ? "heart.fill" : "heart")
-        }
-        .sensoryFeedback(.impact(weight: .light), trigger: isFavorite) { _, new in new }
-    }
-}
+// Selection change — discrete value snap
+.sensoryFeedback(.selection, trigger: selectedIndex)
+
+// Physical impact — card drops into a slot
+.sensoryFeedback(.impact(weight: .medium), trigger: cardDropped)
+
+// Toggle — fires only when toggling ON, not off
+.sensoryFeedback(.impact(weight: .light), trigger: isFavorite) { _, new in new }
 ```
+
+**Anti-pattern — "The Semantic Mismatch":**
+
+```swift
+// WRONG — .impact on a simple form submission with no physical metaphor
+Button("Save") { save() }
+    .sensoryFeedback(.impact, trigger: saveCount)
+// Correct: .success fires when the save operation confirms completion
+
+// WRONG — .success on every state toggle regardless of outcome
+.sensoryFeedback(.success, trigger: isExpanded)
+// Correct: .selection for a value that cycles through states
+```
+
+**Make haptics optional.** The app must remain fully functional without haptics — don't use a haptic as the only signal that an action completed. Some users turn haptics off entirely; others use devices that don't support them. A haptic is an enhancement, not a dependency.
 
 ## Destructive Actions: Undo Over Confirm
 
