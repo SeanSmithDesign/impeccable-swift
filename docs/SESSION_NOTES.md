@@ -67,3 +67,76 @@ ff12168 feat(impeccable-swift): U3 author 4 Swift-native reference docs
 No writes outside `/Users/seansmith/Code/impeccable-swift/` during the run. The canonical plan at `~/Code/docs/plans/2026-04-12-001-feat-impeccable-swift-plan.md` was not modified (option B — completion tracked in `docs/PLAN.md` inside the repo). `~/Code/docs/SESSION_NOTES.md` was not appended (forbidden per scope); this local copy exists for Sean to optionally paste upward.
 
 — Orchestrator thread, 2026-04-13
+
+---
+
+## 2026-04-15 — HIG gap analysis, anti-attractor, benchmark brief
+
+### What shipped
+
+Phase 1 HIG research sprint and benchmark planning. Two commits:
+
+- `661058a` — Phase 1 HIG gap analysis (13 reference docs, anti-attractor)
+- `3a85af4` — Brief 04 chat conversation view (replaces original 3 briefs as benchmark target)
+
+### Work done
+
+**HIG gap analysis (Phase 1)**
+
+Sourced current iOS 26 HIG content via `vabole/apple-skills` GitHub repo (Apple DocC JSON mirror, timestamps 2026-04-14). WebFetch fails on developer.apple.com (JS-rendered). The apple-skills repo is now documented in global memory (`reference_swift-conventions.md`) and Second Brain (`wiki/engineering-apple-hig-reference.md`).
+
+Gaps filled across the 12 existing reference docs:
+
+| File                    | What was added                                                                                                                             |
+| ----------------------- | ------------------------------------------------------------------------------------------------------------------------------------------ |
+| `accessibility.md`      | **New file** — VoiceOver labels/hints, `.accessibilityElement` grouping, traits table, Reduce Motion, Reduce Transparency, Switch Control  |
+| `interaction-design.md` | Full `SensoryFeedback` semantic mapping with watchOS-only caveat for `.increase`/`.decrease`; "make haptics optional" rule                 |
+| `materials.md`          | Regular vs Clear glass variants; dimming layer rule (35% dark behind clear glass on bright content); slider/toggle exception               |
+| `navigation.md`         | Modal depth rule (one active modal); `.fullScreenCover` vs `.sheet`; `presentationDetents` discipline                                      |
+| `responsive-design.md`  | `presentationCompactAdaptation` with all 4 values                                                                                          |
+| `typography.md`         | 11-style Dynamic Type reference table; `.headline`/`.body` both 17pt caveat; truncation discipline (`lineLimit(1)` + `minimumScaleFactor`) |
+
+**Anti-attractor ported from impeccable v2**
+
+Added "SwiftUI Reflex Check" to `impeccable/SKILL.md` — a `<reflex_swiftui_patterns_to_reject>` block mirroring the upstream `<font_selection_procedure>` pattern. Forces the model to enumerate and reject trained defaults (hardcoded bubble colors, unconstrained layouts, no material, no custom ButtonStyle) before generating. Reference doc count updated 12 → 13 everywhere.
+
+**Benchmark planning**
+
+Decided against deliberately bad sample apps — stock developer output is the right baseline. Settled on a 4-condition benchmark:
+
+- **Build 1** — Stock iOS, plain prompt, global design prefs stripped
+- **Build 2** — Stock foundation + `/impeccable` (web version)
+- **Build 3** — Stock foundation + `/impeccable-swift`
+- **Build 4** — Full Sean setup (global prefs + impeccable-swift + DESIGN.md)
+
+Replaced original 3 briefs (settings, list, onboarding) as starting point with **Brief 04 — Chat Conversation View**: rich messaging interface with 6 content types (text, link preview, photo, PDF, reply thread, date headers) + compose bar. Chosen because it exercises the full design system in one screen and the stock/crafted delta will be immediately visible.
+
+Shared foundation approach confirmed: build `ChatModels` once, each build writes only its `ChatConversationView`. Orchestrator: Opus plans + Sonnet orchestrator + 5 sub-agents (foundation + builds 1–4).
+
+**Impeccable v2 confirmed installed**
+
+`npx skills update impeccable` completed the v2 update. `npx impeccable` CLI available on-demand via npx (no install needed). Stale skills (`normalize`, `onboard`, `arrange`, `extract`) auto-cleanup on first invocation.
+
+**Paul Bakaus context**
+
+Impeccable 3 teased in a Twitter thread. Unified naming (`impeccable-shape` etc.) and a loop runner are the stated direction. Relevant for U10 public flip and UPSTREAM.md maintenance.
+
+### New files
+
+- `impeccable/reference/accessibility.md` — new doc, biggest HIG gap
+- `docs/hig-gap-research.md` — Apple Docs MCP research output
+- `evals/brief-04-chat-conversation.md` — chat benchmark brief
+
+### Commits
+
+```
+3a85af4 feat(evals): add Brief 04 — chat conversation view
+661058a feat: Phase 1 HIG gap analysis — new accessibility doc, 5 reference updates, anti-attractor
+```
+
+### Notes for next session
+
+- **Benchmark build**: Opus plan phase → Sonnet orchestrator → shared foundation → Build 1–4 sub-agents
+- Stripping global design prefs for Build 1: tell the sub-agent to use SwiftUI defaults only
+- UPSTREAM.md SHA still pinned to `00d485659` — needs update now that impeccable v2 shipped
+- U9 (Brukas dogfood) and U10 (public flip) still pending from original plan
