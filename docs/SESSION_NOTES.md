@@ -140,3 +140,67 @@ Impeccable 3 teased in a Twitter thread. Unified naming (`impeccable-shape` etc.
 - Stripping global design prefs for Build 1: tell the sub-agent to use SwiftUI defaults only
 - UPSTREAM.md SHA still pinned to `00d485659` — needs update now that impeccable v2 shipped
 - U9 (Brukas dogfood) and U10 (public flip) still pending from original plan
+
+---
+
+## 2026-04-15 (continued) — Benchmark V1 + V2 execution and results
+
+### What shipped
+
+- `a512e77` — ChatBenchmark V1 (4 builds, 1 judge, ~21 files)
+- `f20630f` — ChatBenchmarkV2 (strict isolation, 4 independent judges, synthesis sub-agent)
+- `32ad4ea` — V2 xcodeproj fix + renamed build files (collision fix)
+- V1 xcodeproj filename collision fixed manually (renamed `ChatConversationView.swift` → `BuildNChat...`)
+
+### Benchmark architecture
+
+Single Xcode project with TabView switching between 4 builds. Shared `ChatModels` foundation (Message, MessageContent, SampleData — 14-item conversation covering all 6 content types). Each build writes one `ChatConversationView.swift`. Judge runs `/impeccable-swift:critique` per build.
+
+**4 conditions:**
+
+- Build 1: Stock Claude, all design context explicitly overridden
+- Build 2: Web impeccable skill applied to SwiftUI
+- Build 3: impeccable-swift skill, no DESIGN.md
+- Build 4: impeccable-swift + DESIGN.md (terracotta accent, SF Pro, material tokens)
+
+### V1 vs V2 methodology difference
+
+V1 had two flaws: (1) builds could read each other's output — cross-contamination flattened scores; (2) shared AccentColor.colorset leaked terracotta into Builds 2/3. V2 fixed with explicit isolation instructions and neutral asset catalog. V2 Build 1 scored 43 findings vs V1's 14 — isolation revealed what stock Claude actually produces.
+
+### V2 results (definitive)
+
+| Build                | Verdict      | Total | P0  | P1  | P2  | P3  |
+| -------------------- | ------------ | ----- | --- | --- | --- | --- |
+| 1 — Stock            | Rework       | 43    | 7   | 21  | 13  | 2   |
+| 2 — Web impeccable   | Polish-first | 39    | 7   | 13  | 14  | 5   |
+| 3 — impeccable-swift | Polish-first | 24    | 2   | 9   | 11  | 2   |
+| 4 — Full setup       | Polish-first | 24    | 2   | 2   | 11  | 9   |
+
+**Key findings:**
+
+- P0+P1 drops from 28 → 4 across the four conditions
+- Web impeccable improved P1s but not P0s (7→7) — can't fix iOS-specific failures
+- impeccable-swift is the largest single delta (P0: 7→2, P1: 13→9)
+- DESIGN.md converts severity not count — 7 P1s become P3s (precision, not lift)
+- iOS HIG floor is higher than web — stock SwiftUI looks more passable than stock HTML/CSS
+
+**Visual observation (V1 simulator):** Build 1 vs 2/3/4 gap is visible but not dramatic at first glance. Skill value is below the surface — Dynamic Type, accessibility labels, reduce motion, safeAreaInset. These don't show in a simulator screenshot but matter for real users.
+
+### Commits
+
+```
+32ad4ea feat(evals): ChatBenchmarkV2 — strict isolation, independent judges, xcodeproj fix
+f20630f feat(evals): ChatBenchmarkV2 build files (orchestrator commit)
+a512e77 feat(evals): ChatBenchmark V1
+fb0d83d docs: session notes 2026-04-15
+3a85af4 feat(evals): add Brief 04 — chat conversation view
+661058a feat: Phase 1 HIG gap analysis + anti-attractor
+```
+
+### Notes for next session
+
+- Open `ChatBenchmarkV2.xcodeproj` in Xcode and run simulator — compare builds visually with clean methodology
+- Consider what "makes the skill produce more visually distinct output" — user noted gap was smaller than expected
+- UPSTREAM.md still needs SHA update (impeccable v2 shipped)
+- U9 Brukas dogfood + U10 public flip still pending
+- Next benchmark brief candidates: product detail, article reader, delivery receipt
