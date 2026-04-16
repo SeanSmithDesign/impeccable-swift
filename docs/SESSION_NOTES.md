@@ -204,3 +204,23 @@ fb0d83d docs: session notes 2026-04-15
 - UPSTREAM.md still needs SHA update (impeccable v2 shipped)
 - U9 Brukas dogfood + U10 public flip still pending
 - Next benchmark brief candidates: product detail, article reader, delivery receipt
+
+---
+
+## 2026-04-15 (wrap) — V2 xcodeproj linker fix
+
+### What shipped
+
+- `e575aad` — Fix V2 root group path in xcodeproj (`path = ChatBenchmark` → `path = ChatBenchmarkV2`)
+
+### Context
+
+V2 xcodeproj was created by copying V1's project file and running path replacements. One reference on line 67 (the root PBXGroup) still pointed to `ChatBenchmark/` instead of `ChatBenchmarkV2/`, causing Xcode to look for all source files in a directory that doesn't exist. Linker failed with "Command Ld failed with a nonzero exit code."
+
+Single-line sed fix confirmed correct. Pushed to remote.
+
+### Ready for tomorrow
+
+- Open `~/Code/impeccable-swift/evals/ChatBenchmarkV2/ChatBenchmarkV2.xcodeproj` in Xcode
+- Run on simulator — V2 has strict isolation + 4 independent judges, so visual comparison should be clean
+- AccentColor still leaks terracotta into Builds 1–3 in V2 (V1's asset catalog was copied over). Low priority — scores are already recorded; visual comparison is the remaining goal
