@@ -19,3 +19,6 @@ Package.resolved
 
 # Tooling scratch (hand-crafted smoke-test files left by dev loops)
 **/.scratch/
+
+# Internal working docs (plans, session notes — not user-facing)
+docs/
