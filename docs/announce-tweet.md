@@ -2,11 +2,11 @@
 
 ## Primary (locked)
 
-Ran a 4-condition SwiftUI benchmark: stock, web impeccable, impeccable-swift, full setup. P0+P1 findings drop 28→4. Visual gap? Barely there. The skill's value sits below the surface — Dynamic Type, accessibility, reduce motion. impeccable-swift v0.1.0-poc:
+Ran a 4-condition SwiftUI benchmark: stock, web impeccable, impeccable-swift, full setup. P0+P1 findings drop 28→4. Visual gap? Barely there. The skill's value is below the surface — Dynamic Type, accessibility, reduce motion. impeccable-swift v0.1.0-poc:
 
 github.com/SeanSmithDesign/impeccable-swift
 
-**Char count:** 281 (257 body + 1 space + 23 t.co URL) — 1 over Twitter's 280 weighted limit. Two minimal trims that preserve voice: (a) "sits below the surface" → "is below the surface" lands at 279, or (b) "Visual gap? Barely there." → "Visual gap's barely there." lands at 280. Pick whichever scans better aloud.
+**Char count:** 279 (255 body + 1 space + 23 t.co URL) — under Twitter's 280 limit. Trimmed "sits below" → "is below" for fit; "Visual gap? Barely there." rhythm preserved as the load-bearing voice beat.
 
 ---
 
