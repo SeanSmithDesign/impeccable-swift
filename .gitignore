@@ -21,5 +21,9 @@ Package.resolved
 # Tooling scratch (hand-crafted smoke-test files left by dev loops)
 **/.scratch/
 
-# Internal working docs (plans, session notes — not user-facing)
-docs/
+# Internal working docs (plans, session notes — not user-facing).
+# Ignore everything under docs/ by default, then re-allow user-facing files.
+docs/*
+!docs/media/
+!docs/research-notes.md
+!docs/announce-tweet.md
