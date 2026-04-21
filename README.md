@@ -40,13 +40,20 @@ Honest caveats:
 
 ## Early results
 
-![4-way ablation grid — C1 no-skill, C2 impeccable (web), C3 impeccable-swift, C4 Sean's Claude setup](./docs/media/grid-4-way.png)
+ChatBenchmarkV2 — Brief 04 (chat conversation view), four builds, four independent judges, neutral asset catalog, strict isolation.
 
-Side-by-side code outputs from the four conditions (not rendered UIs). The strongest differentiator is `Form` adoption — only C3 reaches for `NavigationStack { Form { Section { Toggle … } } }`; C1, C2, and C4 all hand-roll a `VStack` of rows. `@ScaledMetric`, SF Symbols via `Label`, `Button(role: .destructive)`, and multi-variant `#Preview` cluster in C3 alone. C4 is visibly more tasteful than C1 or C2 — semantic color enum, 4pt spacing scale, 44pt tap targets — but doesn't reach for Apple-specific idioms the `DESIGN-SWIFT.md.template` doesn't mandate.
+| Build                | Verdict      | Total | P0  | P1  | P2  | P3  |
+| -------------------- | ------------ | ----- | --- | --- | --- | --- |
+| 1 — Stock            | Rework       | 43    | 7   | 21  | 13  | 2   |
+| 2 — Web impeccable   | Polish-first | 39    | 7   | 13  | 14  | 5   |
+| 3 — impeccable-swift | Polish-first | 24    | 2   | 9   | 11  | 2   |
+| 4 — Full setup       | Polish-first | 24    | 2   | 2   | 11  | 9   |
 
-The honest selling point: even a carefully configured personal setup without impeccable-swift produces competent Swift, but leaves platform-specific affordances on the table.
+P0+P1 findings drop 28→4 across the four conditions. Web impeccable improves P1s but can't touch the iOS-specific P0s. impeccable-swift is the largest single delta. DESIGN.md on top doesn't lift the count further — it converts severity, downgrading seven P1s to P3s. iOS HIG floor is higher than web, so the simulator-screenshot gap is smaller than the numbers suggest. **Skill value sits below the surface — Dynamic Type, accessibility labels, reduce motion, `safeAreaInset`. Doesn't show in a screenshot. Matters on a real device.**
 
-The Brukas takeaway matches: cumulative wins rather than wow-moments. The skill reliably surfaced six off-grid CGFloat literals (including a 2pt math drift hidden in a code comment) and flagged a two-headline typography collision on the empty state. It surfaces candidates; the human decides which to fix and which to skip.
+A looser sister artifact — a brief-01 settings-screen 4-way code-card grid at [`docs/media/grid-4-way.png`](./docs/media/grid-4-way.png) ([RESULTS.md](./evals/outputs/brief-01/RESULTS.md)) — showed the same shape of result with a less rigorous methodology. The V2 table above is the hero.
+
+Bonus, not lead: also ran `critique` against [Brukas](https://github.com/SeanSmithDesign/Pico-Timer) — a SwiftUI focus app I actually ship. Three atomic commits on the [`impeccable-swift-marquee-pass`](https://github.com/SeanSmithDesign/Pico-Timer/tree/impeccable-swift-marquee-pass) branch: spacing literals migrated to `PicoSpacing` tokens, empty-state typography hierarchy tightened, control-bar height expressed on the grid. Honest reading the next morning — couldn't clearly see what changed at first glance. Same shape as the benchmark. The skill surfaces candidates; the human decides which are real.
 
 ### The `PicoShadow` moment
 

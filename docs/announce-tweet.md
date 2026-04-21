@@ -1,54 +1,33 @@
-# Tweet drafts — impeccable-swift v0.1.0-poc
+# Tweet — impeccable-swift v0.1.0-poc
 
-Three variants, each ≤280 chars. Sean picks one. All link to the repo.
+## Primary (locked)
 
-Char counts assume Twitter's t.co URL wrapping (23 chars for the shortened form).
-
----
-
-## Variant A — Lead with the C4 honesty angle (RECOMMENDED per Workstream C observation)
-
-ported a design-quality skill to Swift and ran a 4-way ablation. finding i didn't expect: a carefully configured personal setup gets tasteful Swift, but still leaves platform-specific SwiftUI affordances on the table. v0.1.0-poc, research framing.
+Ran a 4-condition SwiftUI benchmark: stock, web impeccable, impeccable-swift, full setup. P0+P1 findings drop 28→4. Visual gap? Barely there. The skill's value sits below the surface — Dynamic Type, accessibility, reduce motion. impeccable-swift v0.1.0-poc:
 
 github.com/SeanSmithDesign/impeccable-swift
 
-Char count: 271 (247 body + 1 space + 23 URL)
-Hook: the value prop is narrower and more honest than "the skill wins"
+**Char count:** 281 (257 body + 1 space + 23 t.co URL) — 1 over Twitter's 280 weighted limit. Two minimal trims that preserve voice: (a) "sits below the surface" → "is below the surface" lands at 279, or (b) "Visual gap? Barely there." → "Visual gap's barely there." lands at 280. Pick whichever scans better aloud.
 
 ---
 
-## Variant B — Lead with the Form differentiator
+## Optional thread follow-ups
 
-fun finding from a 4-way SwiftUI ablation on a Settings screen: only 1 of 4 configurations reached for `Form`. the other three hand-rolled a VStack of rows. guess which one used the skill. v0.1.0-poc, receipts in the repo.
+Each ≤280 chars. Each stands alone if Sean only posts one. Brukas held until 3/.
 
-github.com/SeanSmithDesign/impeccable-swift
+### 2/ — Methodology
 
-Char count: 246 (222 body + 1 space + 23 URL)
-Hook: sharp single-word differentiator, reader solves the puzzle themselves
+Four conditions, strict isolation, four independent judges. Stock SwiftUI: 43 findings. Full setup: 24, most severity downgraded P1→P3. Web impeccable improved P1s but couldn't touch P0s — can't fix iOS-specific failures from outside iOS.
 
----
+Char count: 238
 
-## Variant C — Lead with the Brukas before/after
+### 3/ — Why the visual gap is small
 
-forked impeccable into Swift and ran it against an app i actually ship. three atomic commits later, the codebase feels a little more cared-for. no wow-moment bug, just cumulative wins. v0.1.0-poc, not a product — sharing the research.
+iOS HIG floor is higher than web — stock SwiftUI looks more passable than stock HTML/CSS in a screenshot. The deltas live in `@ScaledMetric`, `Label` + SF Symbol, `Form`, `safeAreaInset`, `accessibilityLabel`. None photograph well. All matter on a real device.
 
-github.com/SeanSmithDesign/impeccable-swift
+Char count: 260
 
-Char count: 258 (234 body + 1 space + 23 URL)
-Hook: the production-adjacent receipt — real app, real commits, honest characterization
+### 4/ — Brukas (bonus closer)
 
----
+Bonus: ran it against Brukas, the SwiftUI app I actually ship. Three atomic commits on a marquee branch. Honest reading the next morning — couldn't see what changed at first glance. Same shape as the benchmark. Wins are real and mostly invisible until you live in them.
 
-## Thread follow-up (optional, if Sean wants to post a thread)
-
-**2/** the 4 conditions: C1 no skill, C2 web impeccable ported to Swift, C3 impeccable-swift, C4 my personal Claude setup with a DESIGN-SWIFT template but no skill. all four parse and typecheck. differences are taste and idiom, not correctness.
-
-Char count: 237
-
-**3/** C3 is the only condition that reached for `Form`, `Label` + SF Symbol, `Button(role: .destructive)`, `@ScaledMetric`, and multi-variant `#Preview`. C4 was visibly tasteful — semantic colors, 4pt grid, 44pt tap targets — but didn't reach for Apple-specific idioms.
-
-Char count: 263
-
-**4/** big caveats: i wrote the skill AND the eval, one brief, single-session role-play not four isolated environments. directional evidence, not a benchmark. blind designer review and more briefs are on the backlog. full write-up + methodology receipts linked from the repo.
-
-Char count: 268
+Char count: 269
