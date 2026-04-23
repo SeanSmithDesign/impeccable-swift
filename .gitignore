@@ -27,3 +27,4 @@ docs/*
 !docs/media/
 !docs/research-notes.md
 !docs/announce-tweet.md
+!docs/announce-post.md
