@@ -1,0 +1,94 @@
+{
+  "craft": {
+    "description": "Full shape-then-build flow with visual iteration for SwiftUI. Plans the UX with /impeccable-swift shape, loads the right reference files, then builds and iterates in Xcode Previews until the result is delightful. Use when building a new SwiftUI feature end-to-end on iOS, iPadOS, macOS, or visionOS.",
+    "argumentHint": "[feature description]"
+  },
+  "teach": {
+    "description": "Gathers design context for a Swift project. Runs a short discovery interview and writes PRODUCT.md (strategic: users, brand, principles) and, when SwiftUI code exists to analyze, DESIGN.md (visual: Color Sets, SF Pro / custom fonts, spacing, components). Every other command reads these files before doing work. Use once per project.",
+    "argumentHint": ""
+  },
+  "document": {
+    "description": "Generate a DESIGN.md file that captures the current SwiftUI design system. Auto-extracts Color Sets, typography (SF Pro, Dynamic Type, custom fonts), spacing, radii, and component patterns from the codebase and asset catalogs, then asks the user to confirm descriptive language for atmosphere and color character. Follows the Google Stitch DESIGN.md format so the file is tool-compatible. Use when you need a visual design spec an AI agent can follow to stay on-brand on Apple platforms.",
+    "argumentHint": ""
+  },
+  "extract": {
+    "description": "Pull reusable SwiftUI patterns, ViewModifiers, and design tokens into the design system. Identifies repeated view compositions, modifier chains, and hardcoded values, and consolidates them. Use when you have drift across the codebase and want to bring things back to a consistent system.",
+    "argumentHint": "[target]"
+  },
+  "live": {
+    "description": "Interactive SwiftUI variant mode via Xcode Previews. Iterate on a view using the #Preview macro, Canvas, and interactive preview mode to visually experiment with design alternatives. The upstream browser-based element picker has no Apple-native analog; Xcode View Debugger is the closest inspection surface. Optionally references InjectionIII / Hot Reloading for faster iteration.",
+    "argumentHint": ""
+  },
+  "adapt": {
+    "description": "Adapt SwiftUI designs to work across iPhone, iPad, Mac, visionOS, and watchOS. Implements size-class-aware layouts, ViewThatFits, split views, and platform-appropriate touch targets (44pt minimum). Use when the user mentions responsive design, iPad multitasking, macOS window resizing, visionOS considerations, or cross-device compatibility.",
+    "argumentHint": "[target] [context (iPhone, iPad, Mac, visionOS...)]"
+  },
+  "animate": {
+    "description": "Review a SwiftUI feature and enhance it with purposeful animations, micro-interactions, and motion effects that improve usability and delight. Covers .animation(), .transition(), spring physics, phase animators (iOS 17+), and respect for Reduce Motion. Use when the user mentions adding animation, transitions, micro-interactions, motion design, or making the UI feel more alive.",
+    "argumentHint": "[target]"
+  },
+  "audit": {
+    "description": "Run technical quality checks across accessibility (VoiceOver, Dynamic Type, contrast), performance (SwiftUI render cost), theming (dark mode, Color Set coverage), responsive design (size classes), and anti-patterns. Generates a scored report with P0-P3 severity ratings and actionable plan. Invokes the Swift detector arm — SwiftLint custom_rules, impeccable-lint, asset-catalog-checker. Use when the user wants an accessibility check, performance audit, or technical quality review.",
+    "argumentHint": "[area (feature, view, component...)]"
+  },
+  "bolder": {
+    "description": "Amplify safe or boring SwiftUI designs to make them more visually interesting and stimulating. Increases impact through color weight, SF Symbol weight and scale, material depth, and typography contrast while maintaining usability. Use when the user says the design looks bland, generic, too safe, lacks personality, or wants more visual impact and character.",
+    "argumentHint": "[target]"
+  },
+  "clarify": {
+    "description": "Improve unclear UX copy, error messages, microcopy, labels, and instructions in SwiftUI to make interfaces easier to understand. Covers String Catalog entries, accessibilityLabel parity, and Apple-voice phrasing. Use when the user mentions confusing text, unclear labels, bad error messages, hard-to-follow instructions, or wanting better UX writing.",
+    "argumentHint": "[target]"
+  },
+  "colorize": {
+    "description": "Add strategic color to SwiftUI features that are too monochromatic or lack visual interest, using Color Sets, .tint(), and Liquid Glass tinting. Respects dark-mode variants and WCAG contrast. Use when the user mentions the design looking gray, dull, lacking warmth, needing more color, or wanting a more vibrant or expressive palette.",
+    "argumentHint": "[target]"
+  },
+  "critique": {
+    "description": "Evaluate a SwiftUI design from a UX perspective, assessing visual hierarchy, information architecture, emotional resonance, cognitive load, and overall quality with quantitative scoring, persona-based testing, automated anti-pattern detection via impeccable-lint, and actionable feedback. Use when the user asks to review, critique, evaluate, or give feedback on a view or component.",
+    "argumentHint": "[area (feature, view, component...)]"
+  },
+  "delight": {
+    "description": "Add moments of joy, personality, and unexpected touches that make SwiftUI interfaces memorable and enjoyable to use. Covers SF Symbol animations (iOS 17.2+), sensory feedback / haptics, phase animators, and Liquid Glass moments. Respects Reduce Motion. Use when the user asks to add polish, personality, animations, micro-interactions, delight, or make an interface feel fun or memorable.",
+    "argumentHint": "[target]"
+  },
+  "distill": {
+    "description": "Strip SwiftUI designs to their essence by removing unnecessary complexity — flatten view hierarchies, simplify modifier chains, prefer @ViewBuilder to nested if-else. Great design is simple, powerful, and clean. Use when the user asks to simplify, declutter, reduce noise, remove elements, or make a UI cleaner and more focused.",
+    "argumentHint": "[target]"
+  },
+  "harden": {
+    "description": "Make SwiftUI interfaces production-ready: error handling, Task cancellation, optional unwrapping, String Catalog / i18n, text overflow (.lineLimit + .truncationMode), edge case management, and resilience under real-world data. Use when the user asks to harden, make production-ready, handle edge cases, add error states, or fix overflow and i18n issues.",
+    "argumentHint": "[target]"
+  },
+  "onboard": {
+    "description": "Design onboarding flows, first-run experiences, and empty states in SwiftUI that guide new users to value. Covers welcome screens with .fullScreenCover / .sheet, account setup, progressive disclosure via @State step counters, contextual tooltips, ContentUnavailableView for empty states, and activation moments. Use when the user mentions onboarding, first-time users, empty states, activation, getting started, new user flows, or the aha moment.",
+    "argumentHint": "[target]"
+  },
+  "layout": {
+    "description": "Improve SwiftUI layout, spacing, and visual rhythm. Fixes monotonous grids, inconsistent spacing (4/8/16/24 scale), and weak visual hierarchy via HStack/VStack tuning, Grid / LazyVGrid, and ViewThatFits. Use when the user mentions layout feeling off, spacing issues, visual hierarchy, crowded UI, alignment problems, or wanting better composition.",
+    "argumentHint": "[target]"
+  },
+  "optimize": {
+    "description": "Diagnose and fix SwiftUI performance across launch time, view rendering, animations, image loading, and memory. Covers LazyVStack vs VStack, @State vs @Binding vs @Observable cost, AsyncImage vs manual loading, and Instruments (Core Animation, Metal System Trace). Use when the user mentions slow, laggy, janky, performance, or wants a faster, smoother experience.",
+    "argumentHint": "[target]"
+  },
+  "overdrive": {
+    "description": "Push SwiftUI interfaces past conventional limits with technically ambitious implementations — Metal shaders, custom spring physics, scroll-driven reveals, Canvas-based 2D/3D rendering, 60fps animations via CADisplayLink. Use when the user wants to wow, impress, go all-out, or make something that feels extraordinary.",
+    "argumentHint": "[target]"
+  },
+  "polish": {
+    "description": "Perform a final quality pass on SwiftUI code fixing alignment (.frame(alignment:) over magic offsets), spacing consistency, modifier ordering, interaction states, and micro-detail issues before shipping. Use when the user mentions polish, finishing touches, pre-launch review, something looks off, or wants to go from good to great.",
+    "argumentHint": "[target]"
+  },
+  "quieter": {
+    "description": "Tone down visually aggressive or overstimulating SwiftUI designs — soften colors, reduce opacity, lighten shadows, calm animation — while preserving quality. Use when the user mentions too bold, too loud, overwhelming, aggressive, garish, or wants a calmer, more refined aesthetic.",
+    "argumentHint": "[target]"
+  },
+  "shape": {
+    "description": "Plan the UX and UI for a SwiftUI feature before writing code. Runs a structured discovery interview with Apple-platform awareness (iPhone / iPad / Mac / visionOS assumptions, HIG defaults), then produces a design brief that guides implementation. Use during the planning phase to establish design direction, constraints, and strategy before any code is written.",
+    "argumentHint": "[feature to shape]"
+  },
+  "typeset": {
+    "description": "Improve SwiftUI typography by fixing font choices (SF Pro as default, Font.custom for brand type), hierarchy, sizing, weight, Dynamic Type support, and readability. Covers modular scale via Font.system text styles, lineSpacing, numeric styles. Use when the user mentions fonts, type, readability, text hierarchy, sizing looks off, or wants more polished, intentional typography.",
+    "argumentHint": "[target]"
+  }
+}
