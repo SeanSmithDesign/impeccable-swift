@@ -1,10 +1,8 @@
 # impeccable-swift
 
-v0.1.0-poc — proof of concept, not production-grade. Faithful Swift/SwiftUI port.
+v0.2.0 — Swift/SwiftUI port of [impeccable](https://github.com/pbakaus/impeccable) by Paul Bakaus (Apache 2.0). See NOTICE.md for full attribution chain.
 
-impeccable-swift builds on [impeccable](https://github.com/pbakaus/impeccable) by Paul Bakaus (Apache 2.0). See NOTICE.md for full attribution chain.
-
-Based on impeccable pinned at `00d485659` (2026-04-12).
+Based on impeccable pinned at `f5e82162` (2026-04-24).
 
 ## Install
 
@@ -14,18 +12,38 @@ npx skills add SeanSmithDesign/impeccable-swift
 
 ## What this is
 
-A Swift/SwiftUI-flavored design-quality skill family, scoped to iOS 26+ and macOS 26+ with Liquid Glass as first-class vocabulary. Three skills ship in v1:
+A Swift/SwiftUI-flavored design-quality skill, scoped to iOS 26+ and macOS 26+ with Liquid Glass as first-class vocabulary. One skill, 23 sub-commands:
 
-- **impeccable-swift** — umbrella skill carrying the 12 reference docs (8 ported from upstream + 4 Swift-native).
-- **critique** — evaluate a SwiftUI file or view against the reference docs and the project's `DESIGN.md` tokens.
-- **polish** — tighten generated SwiftUI code against the same rules.
+```
+/impeccable-swift <sub-command>
+```
 
-Behind the skills is a three-tool detector stack: SwiftLint `custom_rules` for line-local patterns, a `SwiftSyntax` CLI (`impeccable-lint`) for AST-level checks, and an asset-catalog checker for SF Symbol vs PNG resolution.
+Sub-commands by group:
+
+- **craft:** shape, audit, critique
+- **render:** animate, bolder, colorize, delight, layout, overdrive, quieter, typeset
+- **fix:** adapt, clarify, distill
+- **ship:** harden, onboard, optimize, polish
+- **reference:** teach, document, extract, live
+
+Behind the skill is a three-tool detector stack: SwiftLint `custom_rules` for line-local patterns, a `SwiftSyntax` CLI (`impeccable-lint`) for AST-level checks, and an asset-catalog checker for SF Symbol vs PNG resolution.
+
+## Register
+
+Two files at project root are read automatically on every invocation via `load-context.mjs`:
+
+- `PRODUCT.md` — product register: goal, audience, voice
+- `DESIGN.md` — token register: palette, type, spacing
+
+Place both files at the root of the host project. If absent, the skill runs without project context.
+
+## Live Mode
+
+Browser-based Live Mode from upstream is stubbed — there is no Apple-native analog. Xcode Previews and SnapshotPreviews serve this purpose on Apple platforms. See `reference/live.md` for details.
 
 ## What this isn't
 
-- Not a production-grade release — explicitly a proof of concept.
-- Not a backport. iOS <26 / macOS <26 are not supported in v1.
+- Not a backport. iOS <26 / macOS <26 are not supported.
 - Not a rebrand. Paul's voice, structure, and philosophy are preserved; Swift-specific docs are additive.
 
 ## Links
