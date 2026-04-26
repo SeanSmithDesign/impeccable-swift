@@ -24,6 +24,3 @@ Package.resolved
 # Internal working docs (plans, session notes — not user-facing)
 docs/*
 
-# Exception: v0.2.0 upgrade planning docs travel with the branch until release.
-!docs/3.0-upgrade-plan.md
-!docs/3.0-command-inventory.md

@@ -1,6 +1,6 @@
 # impeccable-swift
 
-v0.2.0 — Swift/SwiftUI port of [impeccable](https://github.com/pbakaus/impeccable) by Paul Bakaus (Apache 2.0). See NOTICE.md for full attribution chain.
+v0.2.0: Swift/SwiftUI port of [impeccable](https://github.com/pbakaus/impeccable) by Paul Bakaus (Apache 2.0). See NOTICE.md for full attribution chain.
 
 Based on impeccable pinned at `f5e82162` (2026-04-24).
 
@@ -32,14 +32,14 @@ Behind the skill is a three-tool detector stack: SwiftLint `custom_rules` for li
 
 Two files at project root are read automatically on every invocation via `load-context.mjs`:
 
-- `PRODUCT.md` — product register: goal, audience, voice
-- `DESIGN.md` — token register: palette, type, spacing
+- `PRODUCT.md`: product register: goal, audience, voice
+- `DESIGN.md`: token register: palette, type, spacing
 
 Place both files at the root of the host project. If absent, the skill runs without project context.
 
 ## Live Mode
 
-Browser-based Live Mode from upstream is stubbed — there is no Apple-native analog. Xcode Previews and SnapshotPreviews serve this purpose on Apple platforms. See `reference/live.md` for details.
+Browser-based Live Mode from upstream is stubbed: there is no Apple-native analog. Xcode Previews and SnapshotPreviews serve this purpose on Apple platforms. See `reference/live.md` for details.
 
 ## What this isn't
 
@@ -48,6 +48,6 @@ Browser-based Live Mode from upstream is stubbed — there is no Apple-native an
 
 ## Links
 
-- [NOTICE.md](./NOTICE.md) — attribution chain.
-- [UPSTREAM.md](./UPSTREAM.md) — upstream surveillance log and pinned SHA.
-- [CHANGELOG.md](./CHANGELOG.md) — release notes.
+- [NOTICE.md](./NOTICE.md): attribution chain.
+- [UPSTREAM.md](./UPSTREAM.md): upstream surveillance log and pinned SHA.
+- [CHANGELOG.md](./CHANGELOG.md): release notes.
