@@ -105,6 +105,6 @@ custom_rules:
 
   material_on_content_layer:
     name: "Material on content-bearing view"
-    regex: '\.background\(\s*\.(?:regular|thin|ultraThin|thick|ultraThick)Material\s*\)'
-    message: "Material on a content-bearing view (TextBubble, PhotoBubble, list rows). Materials belong on chrome / background layers only. False-positive risk on legitimate background chrome: verify before silencing. See impeccable/reference/materials.md."
+    regex: '\b(?:regular|thin|ultraThin|thick|ultraThick)Material\b'
+    message: "Material reference detected. Materials belong on chrome / background layers only: never on content-bearing views (TextBubble, PhotoBubble, list rows, message cells). Coarse rule: matches all Material references, including legitimate background chrome usage. Verify the surrounding view layer before silencing. See impeccable/reference/materials.md."
     severity: warning
