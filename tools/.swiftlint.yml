@@ -96,3 +96,15 @@ custom_rules:
     regex: 'Image\(\s*systemName\s*:[^)]+\)\s*\.frame\('
     message: "Size SF Symbols with `.font()` or `.imageScale()`, not `.frame()`. See impeccable/reference/sf-symbols.md."
     severity: warning
+
+  accessibility_hidden_on_text:
+    name: "Accessibility hidden on possible text view"
+    regex: '\.accessibilityHidden\(\s*true\s*\)'
+    message: "accessibilityHidden(true) hides the view from VoiceOver. Verify the view does not contain semantic Text(...). Decorative-only views are fine; timestamps, sender names, status text are not. See impeccable/reference/accessibility.md."
+    severity: warning
+
+  material_on_content_layer:
+    name: "Material on content-bearing view"
+    regex: '\.background\(\s*\.(?:regular|thin|ultraThin|thick|ultraThick)Material\s*\)'
+    message: "Material on a content-bearing view (TextBubble, PhotoBubble, list rows). Materials belong on chrome / background layers only. False-positive risk on legitimate background chrome: verify before silencing. See impeccable/reference/materials.md."
+    severity: warning
