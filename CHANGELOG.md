@@ -4,6 +4,15 @@ All notable changes to this project will be documented in this file.
 
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/), and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [0.3.0]: 2026-05-26
+
+- **Added:** `codex.md` as the Swift-translated 36th reference doc (ported from upstream skill-v3.1.1 `codex.md`, 105 lines)
+- **Added:** `monoculture_display_font` and `italic_serif_headline` SwiftLint detector rules (Phase 3, tools/.swiftlint.yml)
+- **Added:** Build5_Fonts eval fixture and 3.1.1-rerun directory; `button_link_contrast` added as manual-review entry in audit.md
+- **Changed:** 35 shared reference docs received STYLE.md tone pass mirroring upstream skill-v3.1.1 prose conventions
+- **Eval:** ChatBenchmarkV2 Phase 3.1.1: Build 5 verdict Polish-first (P0+P1 median 12). Gradient holds: B1=23 > B2=20 > B5=12 > B3=10 = B4=10. Both Phase 3 detector rules validated (monoculture_display_font: 4 hits, italic_serif_headline: 1 hit, 3/3 judge convergence). See `evals/ChatBenchmarkV2/3.1.1-rerun/` for full results.
+- **Upstream:** Pinned at `4af581e2` (skill-v3.1.1, 2026-05-26)
+
 ## [0.2.0]: 2026-04-26
 
 **BREAKING:** `/critique` and `/polish` skills removed. Invoke as `/impeccable-swift critique` and `/impeccable-swift polish`.

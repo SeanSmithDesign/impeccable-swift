@@ -1,8 +1,8 @@
 # impeccable-swift
 
-v0.2.0: Swift/SwiftUI port of [impeccable](https://github.com/pbakaus/impeccable) by Paul Bakaus (Apache 2.0). See NOTICE.md for full attribution chain.
+v0.3.0: Swift/SwiftUI port of [impeccable](https://github.com/pbakaus/impeccable) by Paul Bakaus (Apache 2.0). See NOTICE.md for full attribution chain.
 
-Based on impeccable pinned at `f5e82162` (2026-04-24).
+Based on impeccable pinned at `4af581e2` (skill-v3.1.1, 2026-05-26).
 
 ## Install
 
