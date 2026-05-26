@@ -108,3 +108,40 @@ custom_rules:
     regex: '\b(?:regular|thin|ultraThin|thick|ultraThick)Material\b'
     message: "Material reference detected. Materials belong on chrome / background layers only: never on content-bearing views (TextBubble, PhotoBubble, list rows, message cells). Coarse rule: matches all Material references, including legitimate background chrome usage. Verify the surrounding view layer before silencing. See impeccable/reference/materials.md."
     severity: warning
+
+  monoculture_display_font:
+    name: "Monoculture / trend display font"
+    # Matches .font(.custom("<TrendFont>", ...)) — the named fonts below are
+    # the AI-wave monoculture faces flagged in upstream impeccable v3.0.4-3.0.6
+    # (commit b5c203f) and the brand.md reflex-reject list (skill-v3.1.1).
+    # Canonical list: Fraunces, Geist (Sans/Mono), Mona Sans, Plus Jakarta Sans,
+    # Space Grotesk, Recoleta, Instrument Sans, Instrument Serif, Syne,
+    # DM Sans, DM Serif Display, DM Serif Text, Inter, Plus Jakarta Sans.
+    # Coarse rule: matches .font(.custom("...")) with any of these names;
+    # does not distinguish display vs body weight or size context.
+    # False-positive risk: a project that has legitimately licensed Geist or
+    # Mona Sans as its brand face (e.g. a Vercel-ecosystem tool) will see
+    # spurious hits. Silence with // swiftlint:disable:next monoculture_display_font
+    # and document the brand-font exception in your DESIGN.md.
+    regex: '\.font\(\s*\.custom\(\s*"(?:Fraunces|Geist|Geist Sans|Geist Mono|Mona Sans|Plus Jakarta Sans|Space Grotesk|Recoleta|Instrument Sans|Instrument Serif|Syne|DM Sans|DM Serif Display|DM Serif Text)[^"]*"'
+    message: "Trend / monoculture font detected. These faces saturate AI-generated UIs and read as generic by 2026. Prefer system fonts (.body, .headline, .largeTitle) for text hierarchy, or New York serif (.font(.custom(\"New York\", ...))) if a serif voice is required by brand. If this font is your established brand face, suppress this warning and document the exception in DESIGN.md. See impeccable/reference/typography.md."
+    severity: warning
+
+  italic_serif_headline:
+    name: "Italic serif in display context"
+    # Targets the single-line (or tightly chained) case: a .font(.custom()) with
+    # a known serif face immediately followed by .italic() on the same line.
+    # This is the subset of the upstream italic-serif-display rule that line
+    # regex can catch cleanly. Multi-line modifier chains (font on one line,
+    # .italic() several lines later) require AST-tier analysis and are deferred
+    # to a future impeccable-lint rule.
+    # Serif faces matched: Fraunces, Recoleta, Newsreader, Playfair Display,
+    # Cormorant, Cormorant Garamond, Garamond, Tiempos, Lora, Spectral,
+    # Merriweather, Baskerville, Georgia, DM Serif Display, DM Serif Text,
+    # Instrument Serif, EB Garamond, Source Serif (4/Pro).
+    # False-positive risk: editorial or magazine surfaces that intentionally
+    # use italic serif for emphasis at display scale. If the design register
+    # calls for it, suppress and document the intent in DESIGN.md.
+    regex: '\.font\(\s*\.custom\(\s*"(?:Fraunces|Recoleta|Newsreader|Playfair Display|Playfair|Cormorant|Cormorant Garamond|Garamond|EB Garamond|Tiempos|Tiempos Headline|Lora|Spectral|Merriweather|Libre Baskerville|Baskerville|Georgia|DM Serif Display|DM Serif Text|Instrument Serif|Source Serif 4|Source Serif Pro|Source Serif)[^"]*"[^)]*\)[^.]*\.italic\(\)'
+    message: "Italic serif at display scale is a saturated AI-startup hero pattern by 2026. Set the headline roman (remove .italic()), or switch to a non-serif display face. Reserve italic-serif for body emphasis in editorial / magazine contexts -- not for the primary hero. See impeccable/reference/typography.md."
+    severity: warning

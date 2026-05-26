@@ -55,6 +55,10 @@ See [`accessibility.md`](accessibility.md) for the full SwiftUI accessibility mo
 
 - **Contrast issues**: Text contrast ratios below 4.5:1 (AA) or 7:1 (AAA). Asset-catalog-checker reports these automatically; manual check any Color Set pairs the tool cannot infer context for.
 - **Missing accessibility labels**: `Image(systemName:)` and decorative-but-tappable elements without `.accessibilityLabel(_:)`. SwiftLint `missing_accessibility_label` rule catches these at lint time.
+
+#### Manual review: Button and Link contrast (`button_link_contrast`)
+
+Contrast on styled `Button` and `Link` foreground/background combinations is runtime, not lintable -- the actual rendered colors depend on the active color scheme, Material blur context, and system accent. During the audit pass, eyeball any custom-styled `Button(role:)`, `Link`, or `.buttonStyle(.borderedProminent)` overrides for WCAG AA contrast (4.5:1 normal text, 3:1 large text) against the surface they sit on -- especially `Material` and Liquid Glass backgrounds, which shift the effective background luminance. Flag any pair that is borderline in either light or dark mode as a P1 finding.
 - **Semantic containers**: Use `.accessibilityElement(children: .combine)` for grouped content; bare `HStack` groupings without it produce noisy VoiceOver traversal.
 - **Focus management**: Modal presentations (`.sheet`, `.fullScreenCover`) must move VoiceOver focus to the new context. Use `.accessibilityFocused(_:)` and confirm with Accessibility Inspector.
 - **Dynamic Type scaling**: All text must use `.font(.body)` style-based sizes, not `.font(.system(size: 14))` literals. impeccable-lint catches the literals; verify scaling behavior manually at AX5.
