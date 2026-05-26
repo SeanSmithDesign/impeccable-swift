@@ -21,6 +21,7 @@
 		AA00000100000000000000CA /* Build3ChatConversationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA00000100000000000000CB /* Build3ChatConversationView.swift */; };
 		AA00000100000000000000DA /* Build4ChatConversationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA00000100000000000000DB /* Build4ChatConversationView.swift */; };
 		AA00000100000000000000EA /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = AA00000100000000000000EB /* Assets.xcassets */; };
+		AA00000100000000000000FA /* Build5ChatConversationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA000001000000000000010B /* Build5ChatConversationView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -38,6 +39,7 @@
 		AA00000100000000000000CB /* Build3ChatConversationView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Build3ChatConversationView.swift; sourceTree = "<group>"; };
 		AA00000100000000000000DB /* Build4ChatConversationView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Build4ChatConversationView.swift; sourceTree = "<group>"; };
 		AA00000100000000000000EB /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		AA000001000000000000010B /* Build5ChatConversationView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Build5ChatConversationView.swift; sourceTree = "<group>"; };
 		AA00000100000000000000FB /* ChatBenchmarkV2.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = ChatBenchmarkV2.app; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
@@ -62,6 +64,7 @@
 				AA000001000000000000014A /* Build2_WebImpeccable */,
 				AA000001000000000000015A /* Build3_ImpeccableSwift */,
 				AA000001000000000000016A /* Build4_FullSetup */,
+				AA000001000000000000017B /* Build5_Fonts */,
 				AA00000100000000000000EB /* Assets.xcassets */,
 			);
 			path = ChatBenchmarkV2;
@@ -111,6 +114,14 @@
 				AA00000100000000000000DB /* Build4ChatConversationView.swift */,
 			);
 			path = Build4_FullSetup;
+			sourceTree = "<group>";
+		};
+		AA000001000000000000017B /* Build5_Fonts */ = {
+			isa = PBXGroup;
+			children = (
+				AA000001000000000000010B /* Build5ChatConversationView.swift */,
+			);
+			path = Build5_Fonts;
 			sourceTree = "<group>";
 		};
 		AA000001000000000000017A /* Products */ = {
@@ -211,6 +222,7 @@
 				AA00000100000000000000BA /* Build2ChatConversationView.swift in Sources */,
 				AA00000100000000000000CA /* Build3ChatConversationView.swift in Sources */,
 				AA00000100000000000000DA /* Build4ChatConversationView.swift in Sources */,
+				AA00000100000000000000FA /* Build5ChatConversationView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
