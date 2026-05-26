@@ -1,10 +1,10 @@
 # critique
 
-Evaluate SwiftUI design from a UX perspective. Assess visual hierarchy, information architecture, emotional resonance, cognitive load, and overall quality using quantitative scoring, persona-based testing, deterministic detector output, and actionable feedback.
+Evaluate SwiftUI design from a UX perspective: visual hierarchy, information architecture, emotional resonance, cognitive load, and overall quality. Output is quantitative scoring, persona-based testing, deterministic detector results, and actionable findings.
 
 Use when the user asks to review, critique, evaluate, or give feedback on a SwiftUI view, screen, or component.
 
-**Scope**: Critique reports. It does not fix. When the user says "fix it," hand off to `/impeccable-swift polish`.
+**Scope**: Critique reports only. Critique does not fix. When the user says "fix it," hand off to `/impeccable-swift polish`.
 
 ---
 
@@ -16,7 +16,7 @@ Run the shared loader before any assessment:
 node .claude/skills/impeccable-swift/scripts/load-context.mjs
 ```
 
-Apply two-layer read precedence: project `DESIGN.md` and `PRODUCT.md` tokens override universal defaults where explicit; universal rules apply where the project is silent; Apple HIG is the final tiebreaker.
+Two-layer read precedence: project `DESIGN.md` and `PRODUCT.md` tokens override universal defaults where explicit; universal rules apply where the project is silent; Apple HIG is the final tiebreaker.
 
 If `DESIGN.md` is missing, run universal-only. If unparseable, warn once and continue.
 
@@ -26,9 +26,9 @@ If `DESIGN.md` is missing, run universal-only. If unparseable, warn once and con
 
 ## Gather Assessments
 
-Launch two independent assessments. **Neither may see the other's output.** This isolation makes the combined score honest. Running both in one pass silently anchors them to each other; do not shortcut for cost, speed, or context-size reasons.
+Launch two independent assessments. **Neither may see the other's output.** This isolation is what makes the combined score honest. Running both in one pass silently anchors them to each other; do not shortcut for cost, speed, or context-size reasons.
 
-Delegate each to a separate sub-agent (Claude Code's `Agent` tool). Each returns structured findings as text. Do NOT output findings to the user yet.
+Delegate each to a separate sub-agent (Claude Code's `Agent` tool). Each returns structured findings as text. Do not output findings to the user yet.
 
 Fall back to sequential in-head work only if the environment genuinely cannot spawn sub-agents.
 
@@ -77,9 +77,9 @@ Does this look like every other AI-generated SwiftUI interface? Check for:
 - **Information architecture**: Is the navigation structure appropriate to the platform? Refer to [`navigation.md`](navigation.md) for iOS vs macOS idioms (`NavigationStack` vs `NavigationSplitView`, tab bar vs sidebar).
 - **Emotional resonance**: Does the interface match the register (brand vs product)? Consult [`brand.md`](brand.md) and [`product.md`](product.md).
 - **Discoverability**: Are interactive controls obvious? Does anything look tappable that isn't, or vice versa?
-- **Composition**: Balance, whitespace, rhythm. Are spacing values from a consistent scale (multiples of 4 or 8)?
+- **Composition**: Balance, whitespace, rhythm. Spacing values should come from a consistent scale (multiples of 4 or 8).
 - **Typography**: Is Dynamic Type used throughout? Are numeric formats localized? See [`typography.md`](typography.md).
-- **Color and materials**: Are colors semantic or hardcoded hex? Do materials match the platform surface tier? See [`materials.md`](materials.md) and `color-and-contrast.md`.
+- **Color and materials**: Are colors semantic or hardcoded hex? Do materials match the platform surface tier? See [`materials.md`](materials.md) and [`color-and-contrast.md`](color-and-contrast.md).
 
 #### State Coverage
 
@@ -94,7 +94,7 @@ Flag any state that is unhandled or visually broken.
 
 #### View Hierarchy Depth
 
-Deeply nested SwiftUI view trees signal copy-paste composition, not design thinking. Flag:
+Deeply nested SwiftUI view trees signal copy-paste composition. Flag:
 
 - `VStack` inside `VStack` inside `VStack` (more than 3 layers without a semantic component boundary)
 - Modifier chains longer than 8 modifiers on a single view
@@ -124,7 +124,7 @@ Consult [`cognitive-load.md`](cognitive-load.md). Run the 8-item cognitive load 
 
 Consult [`heuristics-scoring.md`](heuristics-scoring.md). Score each of the 10 heuristics 0-4. This scoring will be presented in the report.
 
-Return structured findings: AI slop verdict, heuristic scores, cognitive load assessment, state coverage gaps, what's working (2-3 items), priority issues (3-5 with what/why/fix), minor observations, and provocative questions.
+Return structured findings: AI slop verdict, heuristic scores, cognitive load assessment, state coverage gaps, what's working (2-3 items), priority issues (3-5 with what/why/fix), minor observations, and questions to consider.
 
 ---
 
@@ -172,7 +172,7 @@ Return: detector findings per tool (counts, file locations, pattern names), and 
 
 ## Generate Combined Critique Report
 
-Synthesize both assessments into a single report. Do NOT simply concatenate. Weave findings together, noting where the LLM review and detector agree, where the detector caught issues the LLM missed, and where detector findings are false positives.
+Synthesize both assessments into a single report. Do not simply concatenate. Weave findings together, noting where the LLM review and detector agree, where the detector caught issues the LLM missed, and where detector findings are false positives.
 
 Structure feedback as a design director would.
 
@@ -198,7 +198,7 @@ Present Nielsen's 10 heuristics scores as a table:
 | 10        | Help and Documentation          | ?         |                                      |
 | **Total** |                                 | **??/40** | **[Rating band]**                    |
 
-Be honest with scores. A 4 means genuinely excellent. Most real interfaces score 20-32.
+Be honest. A 4 means genuinely excellent. Most real interfaces score 20-32.
 
 ---
 
@@ -222,7 +222,7 @@ A brief gut reaction: what works, what doesn't, and the single biggest opportuni
 
 ### What's Working
 
-Highlight 2-3 things done well. Be specific about why they work. Do not manufacture praise to soften the report.
+Highlight 2-3 things done well. Be specific. Do not manufacture praise.
 
 ---
 
@@ -253,7 +253,7 @@ For each selected persona, walk through the primary user action and list specifi
 
 Be specific. Do not write generic persona descriptions. Write what broke for them in this interface.
 
-Register context: if the interface is a brand-register surface (marketing shell, portfolio, hero onboarding), evaluate against the delight and storytelling expectations from [`brand.md`](brand.md). If it's a product-register surface (authenticated app, data views, forms), evaluate against utility and efficiency expectations from [`product.md`](product.md).
+Register: brand-register surfaces (marketing shell, portfolio, hero onboarding) get evaluated against delight and storytelling expectations from [`brand.md`](brand.md). Product-register surfaces (authenticated app, data views, forms) get evaluated against utility and efficiency expectations from [`product.md`](product.md).
 
 ---
 
@@ -291,9 +291,9 @@ Provocative questions that might unlock better solutions:
 
 ## Ask the User
 
-**After presenting findings**, use targeted questions based on what was actually found. STOP and call the AskUserQuestion tool to clarify. These answers shape the action plan.
+After presenting findings, use targeted questions based on what was actually found. Stop and call the AskUserQuestion tool to clarify. These answers determine the action plan.
 
-Ask questions along these lines (adapt to specific findings; do NOT ask generic questions):
+Ask questions along these lines (adapt to specific findings; never ask generic questions):
 
 1. **Priority direction**: Based on the issues found, which category matters most right now? For example: "I found problems with state coverage, SF Symbol discipline, and view hierarchy depth. Which area should we tackle first?" Offer the top 2-3 issue categories as options.
 
@@ -301,9 +301,9 @@ Ask questions along these lines (adapt to specific findings; do NOT ask generic 
 
 3. **Scope**: Ask how much to take on. For example: "I found N issues. Want to address everything, or focus on the top 3?" Offer scope options like "Top 3 only," "All issues," "Critical only."
 
-4. **Constraints** (only if relevant): If findings touch many areas, ask if anything is off-limits to preserve.
+4. **Constraints** (only if relevant): If findings touch many areas, ask if anything is off-limits.
 
-**Rules for questions**:
+Rules for questions:
 
 - Every question must reference specific findings from this report. Never ask generic "who is your audience?" questions.
 - Keep to 2-4 questions maximum.
@@ -314,7 +314,7 @@ Ask questions along these lines (adapt to specific findings; do NOT ask generic 
 
 ## Recommended Actions
 
-**After receiving the user's answers**, present a prioritized action summary reflecting their priorities and scope.
+After receiving the user's answers, present a prioritized action summary that reflects their priorities and scope.
 
 ### Action Summary
 
@@ -323,7 +323,7 @@ List recommended commands in priority order:
 1. **`/impeccable-swift [command]`**: Brief description of what to fix (specific context from critique findings)
 2. **`/impeccable-swift [command]`**: Brief description (specific context)
 
-**Rules for recommendations**:
+Rules for recommendations:
 
 - Order by the user's stated priorities first, then by impact
 - Each item's description should carry enough context that the command knows what to focus on

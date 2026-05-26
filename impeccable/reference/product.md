@@ -2,13 +2,13 @@
 
 When design SERVES the product: app UI, settings sheets, dashboards, content lists, forms, navigation stacks, tool panes, admin surfaces, authenticated screens, anything where the user is in a task.
 
-On Apple platforms this is the default register. Most SwiftUI you ship: a settings screen, a `NavigationStack` of content, a `Form`, a content list, a utility tool: lives here. Brand register is the exception: marketing shells, portfolios, campaign surfaces.
+On Apple platforms this is the default register. Most SwiftUI you ship lives here: a settings screen, a `NavigationStack` of content, a `Form`, a content list, a utility tool. Brand register is the exception: marketing shells, portfolios, campaign surfaces.
 
 ## The product slop test
 
-Not "would someone say AI made this": familiarity is often a feature here. The test is: would a user fluent in the platform's best apps (Things, Reeder, Mail, Music, Tot, NetNewsWire, OmniFocus, Linear's Mac client come to mind) sit down and trust this interface, or pause at every subtly-off control?
+Not "would someone say AI made this." Familiarity is often a feature here. The test is: would a user fluent in the platform's best apps (Things, Reeder, Mail, Music, Tot, NetNewsWire, OmniFocus, Linear's Mac client come to mind) sit down and trust this interface, or pause at every subtly-off control?
 
-Product UI's failure mode in SwiftUI isn't flatness, it's strangeness without purpose: hand-built `Toggle` replacements, a custom segmented control where `Picker(.segmented)` is right there, gratuitous spring animations on every state change, display weights where labels should be, invented affordances for standard tasks like search or pull-to-refresh. The bar is earned familiarity. The tool should disappear into the task.
+Product UI's failure mode in SwiftUI isn't flatness, it's strangeness without purpose: hand-built `Toggle` replacements, a custom segmented control where `Picker(.segmented)` is right there, gratuitous spring animations on every state change, display weights where labels should be, invented affordances for standard tasks. The bar is earned familiarity. The tool should disappear into the task.
 
 Apple already standardised most of these affordances. Reaching past them needs a reason.
 

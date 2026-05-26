@@ -1,6 +1,6 @@
 # distill
 
-Remove unnecessary complexity from SwiftUI interfaces, revealing the essential elements and creating clarity through ruthless simplification.
+Strip a SwiftUI interface to its essence. Remove anything that doesn't earn its place: redundant elements, repeated information, decorative noise, cosmetic complexity.
 
 ---
 
@@ -17,25 +17,25 @@ Analyze what makes the interface feel complex or cluttered:
    - **Feature creep**: Too many options, actions, or paths forward
 
 2. **Find the essence**:
-   - What is the primary user goal? (There should be ONE)
-   - What is actually necessary vs nice-to-have?
+   - What's the primary user goal? (There should be ONE)
+   - What's actually necessary vs nice-to-have?
    - What can be removed, hidden, or combined?
-   - What is the 20% that delivers 80% of value?
+   - What's the 20% that delivers 80% of value?
 
-If any of these are unclear from the codebase, STOP and call the AskUserQuestion tool to clarify.
+If any of these are unclear from the codebase, stop and call the AskUserQuestion tool to clarify.
 
-**CRITICAL**: Simplicity is not about removing features. It is about removing obstacles between users and their goals. Every element should justify its existence.
+Simplicity is not about removing features. It's about removing obstacles between users and their goals. Every element must justify its existence.
 
 ## Plan Simplification
 
 Create a ruthless editing strategy:
 
-- **Core purpose**: What is the ONE thing this should accomplish?
-- **Essential elements**: What is truly necessary to achieve that purpose?
+- **Core purpose**: What's the ONE thing this should accomplish?
+- **Essential elements**: What's truly necessary to achieve that purpose?
 - **Progressive disclosure**: What can be hidden until needed?
 - **Consolidation opportunities**: What can be combined or integrated?
 
-**IMPORTANT**: Simplification is hard. It requires saying no to good ideas to make room for great execution. Be ruthless.
+Simplification is hard. It requires saying no to good ideas to make room for great execution. Be ruthless.
 
 ## Simplify the Design
 
@@ -47,7 +47,7 @@ Systematically remove complexity across these dimensions:
 - **Progressive disclosure**: Hide complexity behind clear entry points (`DisclosureGroup`, sheets, step-through flows)
 - **Combine related actions**: Merge similar buttons, consolidate forms, group related content
 - **Clear hierarchy**: ONE primary action, few secondary actions, everything else tertiary or hidden
-- **Remove redundancy**: If it is said elsewhere, don't repeat it here
+- **Remove redundancy**: If it's said elsewhere, don't repeat it here
 
 ### Visual Simplification
 
@@ -64,15 +64,15 @@ Systematically remove complexity across these dimensions:
 - **Linear flow**: Replace complex grids with simple `VStack` where possible
 - **Remove sidebars**: Move secondary content inline or behind a sheet
 - **Full-width**: Use available space generously instead of complex multi-column layouts
-- **Consistent alignment**: Pick leading or center, stick with it
+- **Consistent alignment**: Pick leading or center; stick with it
 - **Generous white space**: Let content breathe, don't pack everything tight
 
 ### Interaction Simplification
 
 - **Reduce choices**: Fewer buttons, fewer options, clearer path forward (paradox of choice is real)
-- **Smart defaults**: Make common choices automatic, only ask when necessary
+- **Smart defaults**: Make common choices automatic; only ask when necessary
 - **Inline actions**: Replace modal flows with inline editing where possible
-- **Remove steps**: Can sign-up be one step instead of three? Can checkout be simplified?
+- **Remove steps**: Can sign-up be one step instead of three? Can the flow be simplified?
 - **Clear CTAs**: ONE obvious next step, not five competing actions
 - **Flatten navigation depth**: Collapse deeply nested stacks; see [`navigation.md`](navigation.md)
 
@@ -95,9 +95,9 @@ Systematically remove complexity across these dimensions:
 
 **NEVER**:
 
-- Remove necessary functionality (simplicity does not mean feature-less)
+- Remove necessary functionality (simplicity is not feature-less)
 - Sacrifice accessibility for simplicity (clear labels and accessibility traits still required)
-- Make things so simple they are unclear (mystery is not minimalism)
+- Make things so simple they're unclear (mystery is not minimalism)
 - Remove information users need to make decisions
 - Eliminate hierarchy completely (some things should stand out)
 - Oversimplify complex domains (match complexity to actual task complexity)
@@ -200,4 +200,4 @@ If you removed features or options:
 - Consider if they need alternative access points
 - Note any user feedback to monitor
 
-Remember: You have great taste and judgment. Simplification is an act of confidence: knowing what to keep and the courage to remove the rest. As Antoine de Saint-Exupery said: "Perfection is achieved not when there is nothing more to add, but when there is nothing left to take away."
+As Antoine de Saint-Exupery wrote: "Perfection is achieved not when there is nothing more to add, but when there is nothing left to take away."

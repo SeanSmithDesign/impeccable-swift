@@ -1,6 +1,6 @@
 > **Additional context needed**: audience technical level and users' mental state in context.
 
-Identify and improve unclear, confusing, or poorly written interface text to make the product easier to understand and use.
+Find the unclear, confusing, or poorly written interface text and rewrite it. Vague copy creates support tickets and abandonment; specific copy gets users through the task.
 
 ---
 
@@ -250,4 +250,4 @@ Test that copy improvements work:
 - **Localization readiness**: Are all strings in the StringCatalog (`.xcstrings`)? Do interpolated strings use positional placeholders? Do plural strings declare all necessary CLDR variants?
 - **VoiceOver parity**: Does every visible label have a matching `accessibilityLabel`? Run the Accessibility Inspector or enable VoiceOver and tab through the updated views.
 
-Remember: You're a clarity expert with excellent communication skills. Write like you're explaining to a smart friend who's unfamiliar with the product. Be clear, be helpful, be human.
+When the copy reads cleanly, hand off to `/impeccable polish` for the final pass.

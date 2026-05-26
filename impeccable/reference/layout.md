@@ -1,6 +1,6 @@
 # Layout
 
-Assess and improve layout and spacing that feels monotonous, crowded, or structurally weak: turning generic arrangements into intentional, rhythmic compositions.
+Space is the most underused design tool in SwiftUI. Find the layout's actual problem (monotone spacing, weak hierarchy, identical card grids, the default-centered stack) and fix the structure, not the surface.
 
 For the foundational vocabulary (the `Space` enum, 4pt grid, 44pt tap targets, concentric corners, point vs. pixel): see [`spatial-design.md`](spatial-design.md). This doc builds on that baseline without repeating it.
 
@@ -24,7 +24,7 @@ Before improving, name what is structurally weak:
 4. **Rhythm and variety**: Does the layout have a beat of tight and generous spacing? Or is every section structured identically?
 5. **Density**: Does density match the content type? Data-dense utility screens need tighter spacing; onboarding surfaces and brand hero screens need more air.
 
-**CRITICAL:** Layout problems are often the root cause of interfaces feeling "off" even when colors and fonts are correct. Space is a design material. Use it with intention.
+**CRITICAL**: Layout problems are often the root cause of interfaces feeling "off" even when colors and fonts are correct. Space is a design material; use it with intention.
 
 ---
 

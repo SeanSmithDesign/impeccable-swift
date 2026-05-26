@@ -1,6 +1,6 @@
 # Quieter
 
-Reduce visual intensity in SwiftUI interfaces that are too bold, aggressive, or overstimulating, creating a more refined and approachable aesthetic without losing effectiveness.
+Quiet design is harder than bold design. Subtlety needs precision. Reduce visual intensity in SwiftUI interfaces that are too loud, aggressive, or overstimulating without losing personality or making the result generic.
 
 ---
 
@@ -14,7 +14,7 @@ Product: "quieter" means reducing visual noise: fewer background accents, flatte
 
 ## Assess Current State
 
-Analyze what makes the interface feel too intense:
+Analyze what makes the design feel too intense:
 
 1. **Identify intensity sources**:
    - **Color saturation**: Overly bright or saturated colors
@@ -25,14 +25,14 @@ Analyze what makes the interface feel too intense:
    - **Scale**: Everything is large and loud with no hierarchy
 
 2. **Understand the context**:
-   - What is the purpose? (Marketing vs tool vs reading experience)
-   - Who is the audience? (Some contexts need energy)
-   - What is working? (Don't throw away good ideas)
-   - What is the core message? (Preserve what matters)
+   - What's the purpose? (Marketing vs tool vs reading experience)
+   - Who's the audience? (Some contexts need energy)
+   - What's working? (Don't throw away good ideas)
+   - What's the core message? (Preserve what matters)
 
 If any of these are unclear from the codebase, STOP and call the AskUserQuestion tool to clarify.
 
-**CRITICAL**: "Quieter" doesn't mean boring or generic. It means refined, sophisticated, and easier on the eyes. Think luxury, not laziness.
+**CRITICAL**: "Quieter" doesn't mean boring or generic. It means refined and easier on the eyes. Think luxury, not laziness.
 
 ## Plan Refinement
 
@@ -43,7 +43,7 @@ Create a strategy to reduce intensity while maintaining impact:
 - **Simplification approach**: What can be removed entirely?
 - **Sophistication approach**: How can we signal quality through restraint?
 
-**IMPORTANT**: Great quiet design is harder than great bold design. Subtlety requires precision.
+**IMPORTANT**: Subtlety requires precision. Quiet without intent collapses to generic.
 
 ## Refine the Design
 
@@ -186,8 +186,8 @@ Ensure refinement maintains quality:
 - **Still functional**: Can users still accomplish tasks easily?
 - **Still distinctive**: Does it have character, or is it generic now?
 - **Better reading**: Is text easier to read for extended periods?
-- **Sophistication**: Does it feel more refined and premium?
+- **Restrained, not absent**: Does the POV survive the cuts?
 - **Contrast compliance**: Verify reduced-contrast areas still meet WCAG AA (4.5:1 for body, 3:1 for large text) using [`color-and-contrast.md`](color-and-contrast.md)
 - **Reduce Motion alignment**: Confirm all non-essential animations respect `accessibilityReduceMotion` (see [`accessibility.md`](accessibility.md))
 
-Remember: Quiet design is confident design. It doesn't need to shout. Less is more, but less is also harder. Refine with precision and maintain intentionality.
+When the result feels right, hand off to `impeccable polish` for the final pass.

@@ -4,11 +4,13 @@
 
 Perform a meticulous final pass to catch all the small details that separate good work from great work. The difference between shipped and polished.
 
+Detector and automated QA output are defect evidence only. A clean tool result is never proof that the design is strong; gather device evidence and inspect the real interaction path.
+
 **Scope**: Polish is tightening, not rewriting. One concern per edit. If a fix requires splitting a view, renaming a model, or changing a data flow, polish refuses and defers: _"This needs architectural change: outside polish scope. Deferring to you."_
 
 ## Design System Discovery
 
-Before polishing, understand the system you are polishing toward:
+Aligning the feature to the design system is **not optional**. Polish without alignment is decoration on top of drift, and it makes the next person's job harder. Discovery comes before any other polish work.
 
 1. **Find the design system**: Run the context loader, then read `PRODUCT.md` and `DESIGN.md`. Look for color token enums (`AppColor`, `AccentColor`), spacing constants (`AppSpacing`), and custom `ViewModifier` / `ButtonStyle` types.
 
@@ -16,15 +18,15 @@ Before polishing, understand the system you are polishing toward:
    node .claude/skills/impeccable-swift/scripts/load-context.mjs
    ```
 
-2. **Note the conventions**: How are shared components imported? What spacing scale is in use? Which colors come from the asset catalog vs hard-coded literals? What animation patterns are established?
+2. **Note the conventions**: How are shared components imported? What spacing scale is in use? Which colors come from the asset catalog vs hard-coded literals? What animation patterns are established? What flow shapes are used for comparable actions (sheet vs full-screen cover, inline vs navigation push, save-on-blur vs explicit submit)?
 
-3. **Identify drift**: Where does the target surface deviate from the system? Hard-coded values that should reference tokens, custom components that duplicate shared ones, spacing that does not match the scale.
+3. **Identify drift, then name the root cause**: For every deviation, classify it as a **missing token** (the value should exist in the system but doesn't), a **one-off implementation** (a shared component already exists but wasn't used), or a **conceptual misalignment** (the feature's flow or hierarchy doesn't match neighboring features). The fix differs by category: patch the value, swap to the shared component, or rework the flow. Fixing the symptom without naming the cause is how drift compounds.
 
-If a design system exists, polish aligns the feature with it. If none exists, polish against the conventions visible in the codebase.
+If a design system exists, polish **must** align the feature with it. If none exists, polish against the conventions visible in the codebase. **If anything about the system is ambiguous, ask. Never guess at design system principles.**
 
 ## Pre-Polish Assessment
 
-Understand the current state and goals:
+Understand the current state and goals before touching anything:
 
 1. **Review completeness**:
    - Is it functionally complete?
@@ -32,13 +34,18 @@ Understand the current state and goals:
    - What is the quality bar? (MVP vs flagship feature?)
    - When does it ship? (How much time for polish?)
 
-2. **Identify polish areas**:
+2. **Think experience-first**: Who actually uses this, and what's the best possible experience for them? Effective design beats decorative polish; a feature that looks beautiful but fights the user's flow is not polished. Walk the path from their perspective before opening Instruments.
+
+3. **Identify polish areas**:
    - Visual inconsistencies
    - Spacing and alignment issues
    - Interaction state gaps (`.disabled`, `.loading`, `.error`)
    - Copy inconsistencies
    - Edge cases and error states
    - Transition smoothness
+   - Information architecture and flow drift (does this feature reveal complexity the way neighboring features do?)
+
+4. **Triage cosmetic vs functional**: Classify each issue as **cosmetic** (looks off, doesn't impede the user) or **functional** (breaks, blocks, or confuses the experience). When polish time is tight, functional issues ship first. Quality should be consistent; never perfect one corner while leaving another rough.
 
 **CRITICAL**: Polish is the last step, not the first. Do not polish work that is not functionally complete.
 
@@ -66,6 +73,16 @@ HStack {
     Text(title)
 }
 ```
+
+### Information Architecture and Flow
+
+Visual polish on a misshapen flow is wasted work. Match the shape of the experience to the system, not just the surface.
+
+- **Progressive disclosure**: Match how much is revealed when, compared to neighboring features. A settings screen exposing 40 fields when the rest of the app reveals 5 at a time is drift, even if every field is perfectly styled.
+- **Established user flows**: Multi-step actions follow the same shape as comparable flows elsewhere: sheet vs full-screen cover, inline edit vs separate navigation push, save-on-blur vs explicit submit, optimistic vs pessimistic updates.
+- **Hierarchy and complexity**: The same conceptual weight gets the same visual weight throughout. Primary actions don't become tertiary in one corner of the product.
+- **Empty, loading, and arrival transitions**: How content arrives, updates, and leaves matches how it does in adjacent features.
+- **Naming and mental model**: The feature uses the same nouns and verbs as the rest of the system. A "Workspace" here shouldn't be a "Project" three screens away.
 
 ### Typography Refinement
 
@@ -241,13 +258,16 @@ Go through systematically:
 **NEVER**:
 
 - Polish before it is functionally complete
+- Polish without aligning to the design system; that's decoration on drift
+- Guess at design system principles instead of asking when something is ambiguous
 - Spend hours on polish if it ships in 30 minutes (triage)
 - Introduce bugs while polishing (test thoroughly)
-- Ignore systematic issues (if spacing is off everywhere, fix the system)
+- Ignore systematic issues (if spacing is off everywhere, fix the system, not just one screen)
 - Perfect one thing while leaving others rough (consistent quality level)
 - Create new one-off components when design system equivalents exist
 - Hard-code values that should reference design tokens
 - Animate layout properties (`.padding`, `.frame`, `.spacing`) directly
+- Introduce new patterns or flows that diverge from established ones
 
 ## Final Verification
 
@@ -258,6 +278,7 @@ Before marking as done:
 - **Ask someone else to review**: Fresh eyes catch things.
 - **Check all states**: Do not just test the happy path.
 - **VoiceOver pass**: Navigate the entire surface with VoiceOver on.
+- **Treat automation carefully**: Run `tools/.swiftlint.yml` and `tools/impeccable-lint/` when relevant, fix their defects, but never cite a clean result as proof that the work is polished.
 
 ## Clean Up
 

@@ -1,10 +1,10 @@
 # Extract
 
-Identify reusable patterns, components, and design tokens, then extract and consolidate them into the design system for systematic reuse.
+Identify reusable patterns, components, and design tokens, then extract and consolidate them into the design system for systematic reuse. Extract what is clearly reusable now; premature abstraction is worse than duplication.
 
 ## Step 1: Discover the Design System
 
-Find the shared UI layer: a `Components/` folder, a local Swift package, or a `Theme/` directory. Understand how it is structured: naming conventions, import strategy, how tokens are declared (enums, extensions, constants).
+Find the shared UI layer: a `Components/` folder, a local Swift package, or a `Theme/` directory. Understand its structure: naming conventions, import strategy, how tokens are declared (enums, extensions, constants).
 
 **CRITICAL**: If no design system exists, STOP and call the AskUserQuestion tool to clarify before creating one. Understand the preferred location and structure first: a `Theme/` folder inside the app target is common for smaller projects; a separate Swift package is the right call when the codebase grows beyond a single target.
 
@@ -36,7 +36,7 @@ Supplement detector output with a manual pass. Look for extraction opportunities
 - **Hardcoded `Font.custom(...)` invocations**: `Font.custom("SomeName-Regular", size: 17)` repeated outside a font extension. Candidate for a `Font` extension in `Theme/`.
 - **Hardcoded `Color(hex:)` literals**: Color values not yet in the Asset Catalog. Candidate for a Color Set with dark-appearance variant.
 
-**Assess value before extracting.** Only extract things used 3+ times with the same intent. Premature abstraction is worse than duplication.
+**Assess value before extracting.** Only extract things used 3+ times with the same intent.
 
 ## Step 4: Plan Extraction
 
@@ -48,7 +48,7 @@ Create a systematic plan before touching code:
 - **Naming conventions**: Match existing patterns in `Components/`, `Modifiers/`, `Theme/`.
 - **Migration path**: Which call sites need updating after each extraction?
 
-**IMPORTANT**: Design systems grow incrementally. Extract what is clearly reusable now, not everything that might someday be reusable.
+Design systems grow incrementally. Extract what is clearly reusable now, not everything that might someday be reusable.
 
 ## Step 5: Extract and Enrich
 
@@ -176,4 +176,4 @@ Update design system documentation:
 - Create a token for every single value: tokens carry semantic meaning, not just numeric identity.
 - Extract things that differ in intent: two card layouts that look alike but serve different purposes should stay separate.
 
-Remember: a good design system is a living system. Extract patterns as they emerge, enrich them thoughtfully, and maintain them consistently.
+A good design system is a living system. Extract patterns as they emerge, enrich them thoughtfully, and maintain them consistently.

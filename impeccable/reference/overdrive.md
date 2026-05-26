@@ -1,6 +1,6 @@
 # Overdrive
 
-Push an interface past conventional limits. On Apple Silicon with SwiftUI, "extraordinary" has a precise meaning: Metal shaders running at 8.3ms frames on ProMotion displays, `MeshGradient` fluid color fields that respond to gesture, `Canvas` particle systems that feel physically alive. This isn't about visual effects for their own sake. It's about using the full power of the platform to make any part of the interface feel like something users didn't think software could do.
+Push an interface past conventional limits. On Apple Silicon with SwiftUI, "extraordinary" has a precise meaning: Metal shaders running at 8.3ms frames on ProMotion displays, `MeshGradient` fluid color fields that respond to gesture, `Canvas` particle systems that feel physically alive. The technique serves the experience, not the engineer's portfolio.
 
 **EXTRA IMPORTANT**: Context determines what "extraordinary" means. A Metal displacement shader on a creative portfolio is impressive. The same shader on a settings page is embarrassing. But a settings page with spring-driven optimistic updates and animated state transitions? That's extraordinary too. Understand the app's register and audience before choosing a technique.
 
@@ -8,21 +8,21 @@ Push an interface past conventional limits. On Apple Silicon with SwiftUI, "extr
 
 ## Propose Before Building
 
-This command has the highest potential to misfire. Do NOT jump straight into implementation.
+This command has the highest potential to misfire. Do NOT jump straight into implementation. You MUST:
 
 1. **Think through 2-3 different directions**: consider different techniques, levels of ambition, and aesthetic approaches. For each direction, briefly describe what the result would look and feel like in the hands of the user.
-2. **Stop and present these directions to the user.** Explain trade-offs (device support floor, frame budget impact, build complexity). Wait for a pick.
+2. **Present these directions to the user.** Explain trade-offs (device support floor, frame budget impact, build complexity). Wait for a pick.
 3. Only proceed with the direction the user confirms.
 
-**Iterate in Xcode Canvas.** Technically ambitious effects almost never read correctly on the first build. Use `#Preview` with `PreviewProvider` to iterate visually. The gap between "technically works" and "looks extraordinary" is closed through visual iteration, not code alone.
+**Iterate in Xcode Canvas.** Technically ambitious effects almost never read correctly on the first build. Use `#Preview` to iterate visually. The gap between "technically works" and "looks extraordinary" is closed through visual iteration, not code alone.
 
-Skipping the propose step risks building something that needs to be thrown away.
+Skipping this step risks building something that needs to be thrown away.
 
 ---
 
 ## Assess What "Extraordinary" Means Here
 
-Before choosing a technique, ask: what would make a user of THIS specific interface say "that's not possible on a phone"?
+Before choosing a technique, ask: what would make a user of THIS specific interface say "that's not possible on a phone"? The right kind of technical ambition depends entirely on what you're working with.
 
 ### For visual and marketing surfaces
 
@@ -325,4 +325,4 @@ The gap between "cool" and "extraordinary" is the last 20%: the easing curve on 
 - **The accessibility test**: Enable Reduce Motion and Reduce Transparency in Settings. Still beautiful?
 - **The context test**: Does this technique match THIS app's register and audience?
 
-Remember: "technically extraordinary" is not about using the newest API. It's about making an interface feel like something users didn't think software running on their device could do.
+"Technically extraordinary" isn't about using the newest API. It's about making an interface feel like something users didn't think software running on their device could do.

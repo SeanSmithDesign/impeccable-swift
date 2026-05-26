@@ -1,6 +1,6 @@
 # Colorize
 
-Strategically introduce color to designs that are too monochromatic, gray, or lacking in visual warmth and personality. On Swift platforms, "color" means Asset Catalog Color Sets with semantic names, dark-mode variants, and contrast-checked values: not hex literals scattered across view files.
+Replace timid grayscale or single-accent designs with a strategic palette. On Swift platforms, "color" means Asset Catalog Color Sets with semantic names, dark-mode variants, and contrast-checked values: not hex literals scattered across view files. More color is not better. Strategic color beats visual noise every time.
 
 > **Additional context needed**: existing brand colors and whether the host app already has a Color extension.
 
@@ -8,9 +8,9 @@ Strategically introduce color to designs that are too monochromatic, gray, or la
 
 ## Register
 
-**Brand:** palette IS voice. Pick a color strategy first (Restrained / Committed / Full palette / Drenched) and follow its dosage. Committed, Full palette, and Drenched deliberately exceed the 10-percent rule: that rule is Restrained only.
+Brand: palette IS voice. Pick a color strategy first (Restrained / Committed / Full palette / Drenched) and follow its dosage. Committed, Full palette, and Drenched deliberately exceed the 10-percent rule: that rule applies to Restrained only.
 
-**Product:** semantic-first and almost always Restrained. Accent color is reserved for primary action, current selection, and state indicators: not decoration. Every color has a consistent meaning across every screen.
+Product: semantic-first and almost always Restrained. Accent color is reserved for primary action, current selection, and state indicators: not decoration. Every color has a consistent meaning across every screen.
 
 ---
 
@@ -48,15 +48,15 @@ Analyze the current state before touching anything:
 
 If any of these are unclear from the codebase, stop and ask before proceeding.
 
-**Critical:** More color does not mean better. Strategic color beats visual noise every time. Every color should have a purpose.
+Every color needs a purpose.
 
 ---
 
 ## Plan Color Strategy
 
-Choose a strategy and a small palette before writing a single line of code:
+Choose a strategy and a palette before writing a single line of code:
 
-- **Color palette**: 2-4 colors beyond neutrals. Name them before you place them.
+- **Color palette**: 2-4 colors beyond neutrals. Name them before placing them.
 - **Dominant color**: Which color owns 60% of colored elements?
 - **Accent colors**: 30% and 10% supporting and highlight roles.
 - **Application plan**: Which Color Set appears where, and why?
@@ -206,13 +206,13 @@ RoundedRectangle(cornerRadius: 12, style: .continuous)
     }
 ```
 
-**On opacity:** A repeated `.opacity` value is a token that should exist in the Asset Catalog. If `accentPrimary.opacity(0.08)` appears on more than two surfaces, define `surfaceAccentWash` as a proper Color Set.
+**On opacity:** A repeated `.opacity` value is a token that should live in the Asset Catalog. If `accentPrimary.opacity(0.08)` appears on more than two surfaces, define `surfaceAccentWash` as a Color Set.
 
 ### Tinted Neutrals, Not Pure Gray
 
 Pure gray surfaces are dead. Tint every neutral slightly toward the brand hue. Two to five percent saturation is invisible as "color" but audible as "warmth."
 
-Build the neutral scale from the brand hue: if the brand is amber, neutrals lean warm. If the brand is teal, they lean cool. Do not reach for a blue-tinted or warm-tinted neutral by reflex.
+Build the neutral scale from the brand hue: amber brand, neutrals lean warm; teal brand, they lean cool. Do not reach for a blue-tinted or warm-tinted neutral by reflex: those are the AI-design defaults, not the right answer for any specific brand.
 
 See [`color-and-contrast.md`](color-and-contrast.md) for the tinted neutral pattern.
 

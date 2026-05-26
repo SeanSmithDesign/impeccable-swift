@@ -1,6 +1,6 @@
 # Delight
 
-Add moments of joy, personality, and unexpected polish that transform functional interfaces into memorable experiences. Elevates functional to delightful. Use when the brief asks for polish, personality, animations, micro-interactions, or anything that makes an interface feel alive.
+Find the moments where personality and unexpected polish turn a functional interface into one users remember and tell people about. Add only where the moment earns it. Delight everywhere reads as noise.
 
 > **Additional context needed**: what's appropriate for the domain (playful vs professional vs quirky vs elegant), and which register the surface lives in.
 
@@ -8,9 +8,9 @@ Add moments of joy, personality, and unexpected polish that transform functional
 
 ## Register
 
-Brand surfaces support distributed delight: animated hero moments on landing, expressive type motion, seasonal palette shifts, personality woven into every section transition. The whole surface is the canvas. See [`brand.md`](brand.md).
+Brand: delight can be distributed across animated hero moments, expressive type motion, seasonal palette shifts, personality woven into every section transition. The whole surface is the canvas.
 
-Product surfaces support moment-specific delight: a success haptic on save, a symbol bounce on toggle, a confetti burst on a streak milestone. Reliability and consistency carry the rest. Delight pushed into every task state reads as noise and undermines trust. See [`product.md`](product.md).
+Product: delight at specific moments, not pages. Completion, first-time actions, error recovery, milestone crossings. Reliability and consistency carry the rest. Delight pushed into every task state reads as noise and undermines trust.
 
 **The register governs the distribution, not the technique.** SF Symbol animations and haptics are available to both. The difference is scope: brand gets generous, product gets surgical.
 
@@ -30,17 +30,17 @@ Identify where delight would enhance (not distract from) the experience:
    - **Easter eggs**: Hidden discoveries for curious users
 
 2. **Understand the context**:
-   - What is the brand personality? (Playful? Professional? Quirky? Elegant?)
-   - What is the audience? (Tech-savvy? Creative? Corporate?)
-   - What is the emotional context? (Accomplishment? Exploration? Frustration?)
-   - What is appropriate? (A banking app is not a gaming app)
+   - What's the brand personality? (Playful? Professional? Quirky? Elegant?)
+   - Who's the audience? (Tech-savvy? Creative? Corporate?)
+   - What's the emotional context? (Accomplishment? Exploration? Frustration?)
+   - What's appropriate? (Banking app is not a gaming app)
 
 3. **Define the delight strategy**:
    - **Subtle sophistication**: Refined symbol animations, spring physics on feedback (productivity tools, premium product UI)
    - **Playful personality**: Whimsical haptic choreography, expressive symbol sequences (consumer apps)
    - **Sensory richness**: Haptics + symbol motion coordinated, mesh gradient moments (creative tools, brand shells)
 
-**CRITICAL**: Delight should enhance usability, never obscure it. If users notice the delight more than they notice finishing their task, you have gone too far.
+Delight should enhance usability, never obscure it. If users notice the delight more than finishing their task, you have gone too far.
 
 ---
 
@@ -48,7 +48,7 @@ Identify where delight would enhance (not distract from) the experience:
 
 ### Delight Amplifies, Never Blocks
 
-- Delight moments should be quick (under 1 second unless it is a deliberate hero beat)
+- Delight moments should be quick (under 1 second unless it's a deliberate hero beat)
 - Never delay core functionality for delight
 - Make delight skippable or ambient enough to ignore
 - Respect the user's time and task focus
@@ -57,20 +57,20 @@ Identify where delight would enhance (not distract from) the experience:
 
 - Hide delightful details for users to discover on their own
 - Reward exploration: long-press a hero image, hold a toggle, tap a logo three times
-- Do not announce every delight moment: let it emerge
+- Do not announce every delight moment; let it emerge
 - Designed discoveries get shared; designed announcements get skipped
 
 ### Appropriate to Context
 
 - Match delight to the emotional moment: celebrate success, empathize with errors
 - Do not be playful during critical failure states (data loss warnings, payment failures)
-- Match brand personality and audience expectations: calibrate, do not generalize
+- Match brand personality and audience expectations; calibrate, do not generalize
 - Cultural sensitivity: what is delightful varies by region and by profession
 
 ### Compound Over Time
 
 - Delight should remain fresh with repeated use
-- Vary responses: not the same symbol animation every single time
+- Vary responses: not the same symbol animation every time
 - Reveal deeper layers with continued use
 - Build subtle anticipation through established patterns
 
@@ -78,7 +78,7 @@ Identify where delight would enhance (not distract from) the experience:
 
 ## SF Symbol Animations
 
-SF Symbol animations are the primary Apple-native delight layer for icon-driven moments. Available from iOS 17+ and extended significantly in iOS 17.2+. Prefer `.symbolEffect` modifiers over custom `withAnimation` loops on image state.
+SF Symbol animations are the primary Apple-native delight layer for icon-driven moments. Available from iOS 17+, extended significantly in iOS 17.2+. Prefer `.symbolEffect` modifiers over custom `withAnimation` loops on image state.
 
 ### Discrete Effects (one-shot on trigger)
 
@@ -119,7 +119,7 @@ Button {
 }
 ```
 
-**Rule**: Use `.contentTransition(.symbolEffect(.replace))` any time the `systemName` string changes in response to user action. Do not swap images by conditionally rendering two separate `Image` views: it produces a hard cut.
+**Rule**: Use `.contentTransition(.symbolEffect(.replace))` any time the `systemName` string changes in response to user action. Do not swap images by conditionally rendering two separate `Image` views; that produces a hard cut.
 
 See [`sf-symbols.md`](sf-symbols.md) for symbol weight, rendering mode, and sizing rules that govern all symbol usage.
 
@@ -127,7 +127,7 @@ See [`sf-symbols.md`](sf-symbols.md) for symbol weight, rendering mode, and sizi
 
 ## Haptics
 
-Haptics are the most underused Apple delight surface. They work entirely without visual bandwidth. On iPhone they are free (no animation budget required). They confirm, celebrate, and warn at a physical layer that no animation reaches. Use them.
+Haptics are the most underused Apple delight surface. They work without visual bandwidth. On iPhone they are free: no animation budget required. They confirm, celebrate, and warn at a physical layer no animation reaches. Use them.
 
 ### Declarative: `.sensoryFeedback` (preferred, iOS 17+)
 
@@ -172,7 +172,7 @@ struct SaveButton: View {
 }
 ```
 
-The haptic fires the same frame the symbol bounces. The user feels and sees the confirmation simultaneously. This pairing is the most reliable delight moment in product UI.
+The haptic fires the same frame the symbol bounces. The user feels and sees the confirmation simultaneously. This pairing is the canonical product delight moment.
 
 ### Imperative: UIKit generators (fallback)
 
@@ -193,7 +193,7 @@ let notifGen = UINotificationFeedbackGenerator()
 notifGen.notificationOccurred(.success)  // .success, .warning, .error
 ```
 
-**When to use imperative**: drag-and-drop snap events, custom gesture feedback, programmatic list reordering where `.sensoryFeedback` cannot attach cleanly to a state binding.
+Use imperative form for drag-and-drop snap events, custom gesture feedback, and programmatic list reordering where `.sensoryFeedback` cannot attach cleanly to a state binding.
 
 ### macOS haptics
 
@@ -208,7 +208,7 @@ NSHapticFeedbackManager.defaultPerformer.perform(.alignment, performanceTime: .n
 #endif
 ```
 
-Guard all macOS haptic calls behind `#if os(macOS)` or a runtime capability check. Do not fire haptics on scroll events, hover, or passive interactions: it feels like a broken trackpad.
+Guard all macOS haptic calls behind `#if os(macOS)` or a runtime capability check. Do not fire haptics on scroll events, hover, or passive interactions; it feels like a broken trackpad.
 
 ---
 
@@ -216,7 +216,7 @@ Guard all macOS haptic calls behind `#if os(macOS)` or a runtime capability chec
 
 ### Liquid Glass moments
 
-Liquid Glass (iOS 26+, macOS 26+) is not just a surface material: it is a delight layer. Animated refractions, real-time blur adaptation, and the edge highlight that makes a floating control feel genuinely elevated are built in. Reaching for a custom blur stack to replicate this is rebuilding the system poorly.
+Liquid Glass (iOS 26+, macOS 26+) is a delight layer, not just a surface material. Animated refractions, real-time blur adaptation, and the edge highlight that makes a floating control feel genuinely elevated are built in. Reaching for a custom blur stack to replicate this is rebuilding the system poorly.
 
 Reserved, specific Liquid Glass moments that read as delight (not decoration):
 
@@ -228,7 +228,7 @@ See [`materials.md`](materials.md) for `.glassEffect()`, `GlassEffectContainer`,
 
 ### Animated mesh gradients (iOS 18+)
 
-`MeshGradient` produces organic, fluid color fields that animate beautifully at low performance cost. Use them for brand hero surfaces, onboarding backgrounds, and success state celebrations: not as persistent backgrounds in dense product UI.
+`MeshGradient` produces organic, fluid color fields that animate at low performance cost. Use them for brand hero surfaces, onboarding backgrounds, and success state celebrations: not as persistent backgrounds in dense product UI.
 
 ```swift
 struct DelightBackground: View {
@@ -261,7 +261,7 @@ struct DelightBackground: View {
 
 ### Particle and canvas delight
 
-`Canvas` supports lightweight particle systems without SpriteKit overhead. Use for confetti on major milestones, sparkle on achievement unlock, or a subtle floating particle field behind a brand hero. Keep particle count under 200 for smooth 60fps: test on a physical iPhone 12 or older before shipping.
+`Canvas` supports lightweight particle systems without SpriteKit overhead. Use for confetti on major milestones, sparkle on achievement unlock, or a subtle floating particle field behind a brand hero. Keep particle count under 200 for smooth 60fps; test on a physical iPhone 12 or older before shipping.
 
 ```swift
 Canvas { context, size in
@@ -282,7 +282,7 @@ See [`materials.md`](materials.md) for guidance on layering visual effects witho
 
 ## Micro-interactions and Animation
 
-See [`motion-design.md`](motion-design.md) for duration ranges and spring parameters. Delight lives in the same timing rules: under 150ms for instant feedback, 200-350ms for state changes, springs over curves.
+See [`motion-design.md`](motion-design.md) for duration ranges and spring parameters. Delight lives in the same timing rules: under 150ms for instant feedback, 200-350ms for state changes, springs over curves. Do not design animations first and add haptics as an afterthought; design the sensation pairing together.
 
 ### Toggle delight
 
@@ -314,17 +314,17 @@ Toggle(isOn: $isEnabled) {
 
 ### Loading state personality
 
-Rotate through product-specific loading messages, not generic AI filler:
+Write loading messages specific to what your product does:
 
 ```swift
-// Good: specific to what your product does
+// Specific to what your product does
 let messages = [
     "Crunching your latest changes...",
     "Syncing with your team...",
     "Preparing your review...",
 ]
 
-// Bad: AI slop, instantly recognizable as machine-generated
+// AI slop: instantly recognizable as machine-generated
 // "Herding pixels", "Teaching robots to dance", "Consulting the magic 8-ball"
 ```
 
@@ -340,10 +340,10 @@ let messages = [
 
 // After (voice-matched):
 "Your canvas awaits. Start something."
-"Inbox zero. You are crushing it."
+"Inbox zero. You're crushing it."
 ```
 
-**IMPORTANT**: Match copy personality to register. Product register can be warm; it should not be wacky. Brand register has more latitude but must match the specific voice: a luxury travel app should not be chirpy.
+Match copy personality to register. Product register can be warm; it should not be wacky. Brand register has more latitude but must match the specific voice: a luxury travel app should not be chirpy.
 
 ### Error states
 
@@ -355,13 +355,13 @@ let messages = [
 "Your connection dropped. We have your changes. Tap to retry."
 ```
 
-Empathy, not humor, in error states. Humor in error states often lands as dismissive when the user is frustrated.
+Empathy, not humor, in error states. Humor often lands as dismissive when the user is frustrated.
 
 ---
 
 ## Reduced Motion and Transparency Fallbacks
 
-Every animation and every material effect needs a non-animated, non-translucent fallback. This is not optional: Reduce Motion and Reduce Transparency are system-level accessibility preferences that your app must respect.
+Every animation and every material effect needs a non-animated, non-translucent fallback. Reduce Motion and Reduce Transparency are system-level accessibility preferences. Not optional.
 
 ### Reduce Motion
 
@@ -379,7 +379,7 @@ Image(systemName: didSave ? "checkmark.circle.fill" : "circle")
 let animatedT: Float = reduceMotion ? 0.0 : Float(timeline.date.timeIntervalSince1970)
 ```
 
-**Rule**: When `reduceMotion` is true, state changes can still occur: just without animation. Replace spring transitions with instant cuts, symbol bounces with static icon swaps, and mesh gradient motion with a frozen color field.
+**Rule**: When `reduceMotion` is true, state changes can still occur, just without animation. Replace spring transitions with instant cuts, symbol bounces with static icon swaps, and mesh gradient motion with a frozen color field.
 
 ### Reduce Transparency
 
@@ -394,7 +394,7 @@ let animatedT: Float = reduceMotion ? 0.0 : Float(timeline.date.timeIntervalSinc
 )
 ```
 
-**Rule**: When `reduceTransparency` is true, glass surfaces and blur-backed overlays become opaque materials. The depth cue collapses into a flat system material, which is fine. The important thing is that text and controls remain legible.
+**Rule**: When `reduceTransparency` is true, glass surfaces and blur-backed overlays become opaque materials. The depth cue collapses into a flat system material, which is fine. Text and controls must remain legible.
 
 See [`accessibility.md`](accessibility.md) for the full accessibility model, including Dynamic Type, VoiceOver, and contrast requirements.
 
@@ -456,11 +456,11 @@ See [`product.md`](product.md) for the product slop test and the "tool disappear
 
 ## Implementation Notes
 
-**Coordinate haptic with animation on the same frame.** Haptics fired in a `Button` action and animations triggered by the state change it causes will naturally align: Swift's rendering pass schedules them together.
+**Coordinate haptic with animation on the same frame.** Haptics fired in a `Button` action and animations triggered by the resulting state change naturally align: Swift's rendering pass schedules them together.
 
-**Never prepare() a haptic generator speculatively.** `UIImpactFeedbackGenerator.prepare()` is appropriate 100ms before a known interaction (e.g., drag start). Do not call it on `onAppear` speculatively for a future button tap: it wastes battery and the taptic engine is ready within a single frame anyway.
+**Never call `prepare()` speculatively.** `UIImpactFeedbackGenerator.prepare()` is appropriate 100ms before a known interaction (e.g., drag start). Do not call it on `onAppear` for a future button tap: it wastes battery and the taptic engine is ready within a single frame anyway.
 
-**File size and performance.** `MeshGradient` is cheap. `Canvas` particle systems with 200+ elements on older hardware are not. Lottie files in the bundle add download weight; prefer `symbolEffect` or `Canvas` before reaching for Lottie. If you do ship Lottie, lazy-load it.
+**File size and performance.** `MeshGradient` is cheap. `Canvas` particle systems with 200+ elements on older hardware are not. Lottie files add bundle weight; prefer `symbolEffect` or `Canvas` before reaching for Lottie. If you do ship Lottie, lazy-load it.
 
 **NEVER**:
 
@@ -470,17 +470,14 @@ See [`product.md`](product.md) for the product slop test and the "tool disappear
 - Fire haptics on passive events: scroll, hover, background refresh
 - Animate when `accessibilityReduceMotion` is true
 - Use Liquid Glass without a `reduceTransparency` fallback
-- Choose animations first and add haptics as an afterthought (design the sensation pairing together)
 
 ---
 
 ## Verify Delight Quality
 
 - **User reactions**: Do users smile? Share screenshots? Mention it in reviews?
-- **Survives repetition**: Still pleasant after the 100th interaction, or has it become a source of friction?
+- **Survives repetition**: Still pleasant after the 100th interaction, or has it become friction?
 - **Does not block**: Can users ignore or opt out of every delight moment?
 - **Performant**: No frame drops. Test on a physical device. Instruments: Time Profiler during a Canvas burst.
 - **Appropriate**: Matches register (brand vs product), brand personality, and emotional context
 - **Accessible**: Works correctly with Reduce Motion, Reduce Transparency, and VoiceOver. Test all three in the Simulator and on device.
-
-Delight is the difference between a tool and an experience. Add personality, surprise users positively, and create moments worth sharing. Always respect usability: delight must enhance, never obstruct.

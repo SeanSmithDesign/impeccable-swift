@@ -1,6 +1,6 @@
 # Typeset
 
-Assess and improve typography that feels generic, inconsistent, or poorly structured. On Apple platforms the solution is almost never a different typeface: it is better role assignment, correct semantic styles, and weight discipline. Make text feel intentional.
+Assess and improve typography that feels generic, inconsistent, or poorly structured. On Apple platforms the solution is almost never a different typeface: it is better role assignment, correct semantic styles, and weight discipline.
 
 ---
 
@@ -26,7 +26,7 @@ Analyze what is weak or generic about the current type before changing anything.
 
 5. **Consistency**: Do same-role elements use the same semantic style throughout? Are weights used consistently for each role?
 
-**CRITICAL:** The goal is not to make text "more designed": it is to make it clearer, more readable, and more intentional. Good typography disappears; bad typography distracts.
+**CRITICAL:** The goal is not to make text "more designed." It is to make it clearer, more readable, and more intentional. Good typography disappears; bad typography distracts.
 
 ---
 
@@ -48,7 +48,7 @@ Create a systematic plan:
 
 ### Font Selection
 
-Apple's type ecosystem is tighter than the web's. There is no "invisible default" problem with SF Pro: it is the right choice for most product surfaces. The real failure mode is using it _incorrectly_: wrong semantic style, missing weight contrast, or hardcoded sizes that ignore Dynamic Type.
+SF Pro is not the invisible default problem. It is the right choice for most product surfaces. The failure mode is using it _incorrectly_: wrong semantic style, missing weight contrast, hardcoded sizes that break Dynamic Type.
 
 For the rare cases where a brand demands a custom face:
 
@@ -95,7 +95,7 @@ Assign roles from the semantic style set. The size is a consequence of the role,
 | `.caption`     | 12pt    | Image captions; form field labels below inputs     |
 | `.caption2`    | 11pt    | Badges, micro-labels. Use sparingly.               |
 
-**Weight contrast is hierarchy.** Five sizes within 3pt of each other is a muddy scale. Two strong weights: `.regular` and `.semibold`: plus generous size steps creates instant, scannable structure. Combine size + weight + color + spacing to differentiate levels; relying on size alone rarely works.
+**Weight contrast is hierarchy.** Five sizes within 3pt of each other is a muddy scale. Two strong weights (`.regular` and `.semibold`) plus generous size steps creates instant, scannable structure. Combine size + weight + color + spacing to differentiate levels; relying on size alone rarely works.
 
 For repeated style sets, extract a `ViewModifier` rather than repeating modifier chains:
 
@@ -121,7 +121,7 @@ extension View {
 
 Every text style auto-scales. That is the contract. Do not break it.
 
-The current Dynamic Type size is available via `@Environment(\.dynamicTypeSize)` when you need to adapt layout: not font size:
+The current Dynamic Type size is available via `@Environment(\.dynamicTypeSize)` when you need to adapt layout, not font size:
 
 ```swift
 struct AdaptiveRow: View {

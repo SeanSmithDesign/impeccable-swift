@@ -1,6 +1,6 @@
 # Heuristics Scoring Guide
 
-Score each of Nielsen's 10 Usability Heuristics on a 0–4 scale. Be honest. A 4 means genuinely excellent, not "good enough."
+Score each of Nielsen's 10 Usability Heuristics on a 0–4 scale. Be honest: a 4 means genuinely excellent, not "good enough."
 
 This is the rubric the Swift port uses inside `/impeccable-swift critique` and `/impeccable-swift audit`. The 0–4 bands and P0–P3 severity tiers below are platform-agnostic. The examples are Apple-specific: SwiftUI views, Liquid Glass materials, SF Symbols, Dynamic Type, Dark Mode, VoiceOver. When in doubt, ask whether the issue would survive a HIG review.
 
@@ -236,11 +236,11 @@ Even if the system is usable without docs, help should be easy to find, task-foc
 
 | Score Range | Rating     | What It Means                                           |
 | ----------- | ---------- | ------------------------------------------------------- |
-| 36–40       | Excellent  | Minor polish only. Ship it.                             |
+| 36–40       | Excellent  | Minor polish only; ship it.                             |
 | 28–35       | Good       | Address weak areas, solid foundation.                   |
 | 20–27       | Acceptable | Significant improvements needed before users are happy. |
-| 12–19       | Poor       | Major UX overhaul required. Core experience broken.     |
-| 0–11        | Critical   | Redesign needed. Unusable in current state.             |
+| 12–19       | Poor       | Major UX overhaul required; core experience broken.     |
+| 0–11        | Critical   | Redesign needed; unusable in current state.             |
 
 ---
 
@@ -250,7 +250,7 @@ Tag each individual issue found during scoring with a priority level.
 
 | Priority | Name     | Description                                                            | Action                                  |
 | -------- | -------- | ---------------------------------------------------------------------- | --------------------------------------- |
-| **P0**   | Blocking | Prevents task completion, locks out users, or breaks accessibility     | Fix immediately. This is a showstopper. |
+| **P0**   | Blocking | Prevents task completion, locks out users, or breaks accessibility     | Fix immediately; this is a showstopper. |
 | **P1**   | Major    | Causes significant difficulty, confusion, or HIG violation             | Fix before release.                     |
 | **P2**   | Minor    | Annoyance with workaround. Polish gap a careful designer would notice. | Fix in next pass.                       |
 | **P3**   | Polish   | Nice-to-fix. No real user impact.                                      | Fix if time permits.                    |
@@ -292,6 +292,8 @@ Examples that should grade P1:
 - Missing `Settings` scene on macOS, settings shoved into a custom sheet.
 - App ignores the user's `@Environment(\.layoutDirection)`, breaking RTL.
 - No `@ScaledMetric` on spacing tied to text, so layout collapses at AX sizes.
+- Monoculture display fonts: `Font.custom("Fraunces-...")` or `Font.custom("GeistMono-...")` used as the primary display face with no brand rationale. Instant AI design tell. The `monoculture-display-font` detector (Phase 3) flags these by name.
+- Italic serif for decorative emphasis on UI text: `Font.custom(...).italic()` applied to body copy or labels as an aesthetic gesture rather than a semantic one. The `italic-serif-misuse` detector (Phase 3) flags instances where an italic custom font is applied without a semantic reason.
 
 #### P2: Minor
 

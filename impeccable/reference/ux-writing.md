@@ -4,7 +4,7 @@ Every string that reaches the screen is a design decision. Copy is part of the i
 
 ## The Button Label Problem
 
-**Never use "OK", "Submit", "Yes", or "No" as button labels.** Generic verbs make the user translate the label back into an action in their head. Use specific verb + object patterns — the button should read like the thing that will happen when tapped.
+**Never use "OK", "Submit", "Yes", or "No" as button labels.** Generic verbs make the user translate the label back into an action in their head. Use specific verb + object patterns. The button should read like the thing that happens when tapped.
 
 | Bad        | Good           | Why                           |
 | ---------- | -------------- | ----------------------------- |
@@ -26,7 +26,7 @@ Button("Save changes") { save() }
 Button("Delete \(selection.count) items", role: .destructive) { deleteSelected() }
 ```
 
-**Anti-pattern — "The OK Button."** A dialog ends with "OK" / "Cancel." OK of what? The user has to re-read the body copy to know what tapping OK commits them to. Named buttons are self-describing.
+**Anti-pattern: "The OK Button."** A dialog ends with "OK" / "Cancel." OK of what? The user has to re-read the body copy to know what tapping OK commits them to. Named buttons are self-describing.
 
 ## Error Messages: Three Jobs, No Exceptions
 
@@ -53,13 +53,13 @@ Alert(
 | Network error     | "Couldn't reach [thing]. Check your connection and try again." |
 | Server error      | "Something went wrong on our end. We're looking into it."      |
 
-**Never blame the user.** Reframe errors as conditions of the system, not faults of the person. "Email needs an @ symbol" — not "You entered an invalid email."
+**Never blame the user.** Reframe errors as conditions of the system, not faults of the person. "Email needs an @ symbol." Not "You entered an invalid email."
 
-**Anti-pattern — "An error occurred."** Generic, blame-shifting, useless. It tells the user something is wrong but gives them no next move. If you can't say what happened, you shouldn't be showing a dialog.
+**Anti-pattern: "An error occurred."** Generic, blame-shifting, useless. It tells the user something is wrong but gives them no next move. If you can't say what happened, don't show a dialog.
 
 ## Apple Platform Conventions
 
-**Follow Apple's copy conventions on Apple platforms.** On iOS/macOS 26+, errors use sentence case ("Couldn't save note"), not title case. Never start a user-facing string with "Please" — it reads as apologetic and inflates word count. Don't stack exclamation marks; system chrome is already loud enough.
+**Apple's copy conventions are not optional.** On iOS/macOS 26+, errors use sentence case ("Couldn't save note"), not title case. Never start a user-facing string with "Please": it reads as apologetic and inflates word count. Don't stack exclamation marks; system chrome is already loud enough.
 
 ```swift
 // Anti-pattern
@@ -69,11 +69,11 @@ Alert("Please Try Again!", message: Text("An Error Has Occurred!"))
 Alert("Couldn't connect", message: Text("Check your internet and try again."))
 ```
 
-**Anti-pattern — "Exclamation Overload."** Success! Saved! Done! Every toast and alert firing with an exclamation point flattens emotional range. Reserve `!` for rare, genuinely celebratory moments. Default to a period.
+**Anti-pattern: "Exclamation Overload."** Success! Saved! Done! Every toast and alert firing with an exclamation point flattens emotional range. Reserve `!` for rare, genuinely celebratory moments. Default to a period.
 
 ## Empty States Are Onboarding
 
-**Treat every empty state as a first-run moment.** Use `ContentUnavailableView` (iOS 26+) — it gives you a title, message, and action slot, which is exactly the three-part structure empty states need: acknowledge → explain the value → offer the next step.
+**Treat every empty state as a first-run moment.** Use `ContentUnavailableView` (iOS 26+): it gives you a title, message, and action slot. That's the three-part structure empty states need: acknowledge, explain the value, offer the next step.
 
 ```swift
 // Rule
@@ -89,11 +89,11 @@ ContentUnavailableView {
 ContentUnavailableView("No items", systemImage: "tray")
 ```
 
-**Anti-pattern — "The Dead Tray."** A gray tray icon and the words "No items." No explanation of why the user would want items, no action to create one. Empty states are opportunities, not placeholders.
+**Anti-pattern: "The Dead Tray."** A gray tray icon and the words "No items." No explanation of why the user would want items, no action to create one. Empty states are opportunities, not placeholders.
 
 ## Voice vs Tone
 
-**Voice is constant. Tone shifts with the moment.** Your voice is the product's personality — it should sound the same whether the user is succeeding or stuck. Tone adjusts for what's happening on screen right now.
+**Voice is constant. Tone shifts with the moment.** Your voice is the product's personality. It sounds the same whether the user is succeeding or stuck. Tone adjusts for what's happening on screen right now.
 
 | Moment              | Tone                                                              |
 | ------------------- | ----------------------------------------------------------------- |
@@ -106,7 +106,7 @@ ContentUnavailableView("No items", systemImage: "tray")
 
 ## Writing for Accessibility
 
-**Every interactive element needs a standalone label.** VoiceOver reads labels out of context — "Click here" becomes useless when surfaced in the rotor. Use `.accessibilityLabel(_:)` on icon-only controls and make link-equivalent text describe the destination.
+**Every interactive element needs a standalone label.** VoiceOver reads labels out of context. "Click here" is useless in the rotor. Use `.accessibilityLabel(_:)` on icon-only controls and make link-equivalent text describe the destination.
 
 ```swift
 // Anti-pattern
@@ -125,7 +125,7 @@ Button { showPricing() } label: {
 
 ## Confirmation Dialogs: Use Sparingly
 
-**Prefer undo over confirmation.** Most confirmation dialogs are design failures — they shift the cost of reversibility onto the user on every single action. If an action is reversible within a few seconds, use `ToolbarItem` + a transient undo banner instead of a `.confirmationDialog`.
+**Prefer undo over confirmation.** Most confirmation dialogs are design failures: they shift the cost of reversibility onto the user on every action. If an action is reversible within a few seconds, use `ToolbarItem` + a transient undo banner instead of a `.confirmationDialog`.
 
 When you must confirm: name the action in the button, name the consequence in the body, never use "Yes"/"No."
 
@@ -145,7 +145,7 @@ When you must confirm: name the action in the button, name the consequence in th
 
 ## Form Copy
 
-**Show format with placeholders or footers, never with inline instructions above the field.** If a field is non-obvious, explain _why_ you're asking in a `.footer`, not what to type — the label and placeholder already handle the what.
+**Show format with placeholders or footers, never with inline instructions above the field.** If a field is non-obvious, explain _why_ you're asking in a `.footer`, not what to type. The label and placeholder already handle the what.
 
 ```swift
 // Rule
@@ -172,7 +172,7 @@ Section {
 | Sign in / Log in / Enter         | Sign in    |
 | Create / Add / New               | Create     |
 
-**Anti-pattern — "The Thesaurus Trap."** Writers are taught to vary word choice for style. Interfaces are the opposite — users scan for labels as landmarks. Repetition is clarity.
+**Anti-pattern: "The Thesaurus Trap."** Writers vary word choice for style. Interfaces are the opposite: users scan for labels as landmarks. Repetition is clarity.
 
 ## Loading States Are Copy Moments
 

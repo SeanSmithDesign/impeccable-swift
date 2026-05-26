@@ -1,6 +1,6 @@
 # Typography
 
-Type on Apple platforms is a Dynamic Type system. Stop hardcoding point sizes. Every text style scales with the user's accessibility settings, or you are shipping a broken app.
+Type on Apple platforms is a Dynamic Type system. Stop hardcoding point sizes. Every text style scales with the user's accessibility settings. If yours don't, you're shipping a broken app.
 
 ## Dynamic Type Is the Contract
 
@@ -14,7 +14,7 @@ Text("Body copy that scales.").font(.body)
 Text("12 min read").font(.footnote).foregroundStyle(.secondary)
 ```
 
-**Cardinal sin: fixed-pt body text.** `.font(.system(size: 15))` looks fine in the simulator and breaks the moment a user bumps their Dynamic Type setting. If you find yourself reaching for a numeric size, stop, pick the semantic style that matches the role. The only places a fixed size is defensible are single-character icons inside a fixed badge, and numbers inside a tight data visualization where wrapping would break the chart.
+**Cardinal sin: fixed-pt body text.** `.font(.system(size: 15))` looks fine in the simulator and breaks the moment a user bumps their Dynamic Type setting. If you find yourself reaching for a numeric size, stop. Pick the semantic style that matches the role. The only defensible fixed sizes: single-character icons inside a fixed badge, and numbers inside a tight data visualization where wrapping would break the chart.
 
 ## The 11-Style Reference Table
 
@@ -133,6 +133,30 @@ struct BrandHeadline: View {
 
 Never mix a custom font with SF Pro in the same hierarchy unless you intend the contrast: custom display face + SF Pro body is fine; custom sans + SF Pro for a subheading is visual noise.
 
+### Anti-reflexes: custom font selection
+
+Training data overrepresents certain fonts. Reaching for one of them signals the model's defaults, not a considered brand decision.
+
+**Monoculture display fonts.** Fraunces appears in a statistically improbable share of AI-generated SwiftUI designs. Geist is similarly overrepresented in technical brand contexts. Neither is wrong in isolation; both are wrong as first guesses. When `.custom("Fraunces-Regular", ...)` or `.custom("Geist-Regular", ...)` appears without a documented brand rationale, flag it. New York and SF Pro Rounded are platform-native alternatives with equivalent personality range and zero bundle overhead.
+
+**Italic serif misuse.** An expressive italic serif (Fraunces Italic, Playfair Display Italic, or `.fontDesign(.serif)` with `.italic()`) on a display headline reads as editorial when used deliberately. When it appears on every heading in a utility app or as a default "feels premium" move, it is a tell. The italic weight of a serif is the exclamation point of typography: one well-placed use lands; three uses on the same screen cancel each other out. If `.fontDesign(.serif)` and `.italic()` appear together and the brief is a product surface, ask what specifically earns that choice.
+
+```swift
+// Deliberate: editorial long-form reader, one hero headline
+Text(article.title)
+    .font(.custom("NewYork-RegularItalic", size: heroSize, relativeTo: .largeTitle))
+
+// Tell: italic serif applied to every section heading in a task manager
+Text(section.name)
+    .font(.system(.title3, design: .serif, weight: .regular))
+    .italic()  // No editorial justification; looks like a training-data default
+```
+
+**Anti-reflexes by context.**
+- A technical brief does not need a serif "for warmth." Technical tools should look like technical tools. Use SF Pro with deliberate weight contrast.
+- A premium brief does not need the same expressive serif every other premium app is using. Premium can be SF Pro Display at a commanding scale.
+- A "modern" brief does not need a geometric sans from outside the system. The most modern thing is often not using the font every model reaches for.
+
 ### Variable fonts and font design
 
 SwiftUI exposes design-axis selection without hand-rolling a `Font.custom(_:size:)` per weight. Use these on either SF Pro or a registered variable font:
@@ -231,4 +255,4 @@ Text("Tertiary").foregroundStyle(.tertiary)
 
 ---
 
-**Avoid:** Hardcoded `.font(.system(size:))` for body text. More than two weights per surface. Custom fonts without `@ScaledMetric`. Clamping Dynamic Type globally. Non-tabular digits in data. Pairing two sans-serifs that are almost the same.
+**Avoid:** Hardcoded `.font(.system(size:))` for body text. More than two weights per surface. Custom fonts without `@ScaledMetric`. Clamping Dynamic Type globally. Non-tabular digits in data. Pairing two sans-serifs that are almost the same. Fraunces or Geist without a documented brand rationale. Italic serif on product surfaces without editorial justification.

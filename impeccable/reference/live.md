@@ -2,7 +2,7 @@
 
 The upstream `live` sub-command is an interactive, browser-based variant generator: select an element in the running browser dev server, pick a design action (bolder, distill, colorize, etc.), and receive AI-generated HTML+CSS variants hot-swapped via HMR without a page reload.
 
-**The Swift fork does not port this workflow.** The runtime surface is different: SwiftUI variants are declared as `#Preview` blocks and cycled in Xcode Canvas, not injected over a live HTTP connection. The 7 browser `.mjs` runtime scripts are not ported. There is no element picker.
+**The Swift fork does not port this workflow.** SwiftUI variants are declared as `#Preview` blocks and cycled in Xcode Canvas, not injected over a live HTTP connection. The 7 browser `.mjs` runtime scripts are not ported; there is no element picker.
 
 This file exists for sub-command parity and documents the native equivalent.
 
@@ -66,7 +66,7 @@ import SnapshotPreviewsCore
 
 ### Interactive Canvas mode
 
-In Xcode Canvas, toggle the **Live** button (play icon) to enter interactive mode. Tap, drag, and scroll inside the preview without rebuilding. Use this to verify gesture recognizers, scroll momentum, swipe actions, and animation timing. It is not a design-picker like upstream's browser element selector, but it does let you explore states hands-on without launching a simulator.
+In Xcode Canvas, toggle the **Live** button (play icon) to enter interactive mode. Tap, drag, and scroll inside the preview without rebuilding. Use it to verify gesture recognizers, scroll momentum, swipe actions, and animation timing. It is not a design-picker like upstream's browser element selector, but it lets you explore states hands-on without launching a simulator.
 
 ---
 
@@ -88,9 +88,7 @@ See [`snapshot-previews/README.md`](../../snapshot-previews/README.md) for the c
 
 The closest equivalent to upstream's browser element picker is **Xcode View Debugger**.
 
-In a running app or simulator session: Debug ▸ View Debugging ▸ Capture View Hierarchy.
-
-This gives you a 3D exploded view of the live view tree: see layer ordering, clipping regions, frame values, and constraint conflicts. Unlike upstream's picker, it requires an active simulator or device session, not a static preview.
+In a running app or simulator session: Debug ▸ View Debugging ▸ Capture View Hierarchy. This gives you a 3D exploded view of the live view tree: layer ordering, clipping regions, frame values, and constraint conflicts. Unlike upstream's picker, it requires an active simulator or device session, not a static preview.
 
 For most design-iteration work, Canvas interactive mode is sufficient. Reach for the View Debugger when the visual output differs from what the code implies or when layer ordering is ambiguous.
 

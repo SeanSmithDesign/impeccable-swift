@@ -12,7 +12,9 @@ If someone could look at this and say "AI made that" without hesitation, it's fa
 
 Brand isn't a neutral register. AI-generated landing pages and template SwiftUI shells have flooded the App Store, and average is no longer findable. Restraint without intent now reads as mediocre, not refined. Brand surfaces need a POV, a specific audience, a willingness to risk strangeness. Go big or go home.
 
-**The second slop test: aesthetic lane.** Before committing to moves, name the reference. A Klim-style specimen page is one lane, Stripe-minimal is another, Liquid-Death-acid-maximalism is another, Apple's own product pages are yet another. Don't drift into editorial-magazine aesthetics on a brief that isn't editorial. A hiking brand with Cormorant italic drop caps has the wrong register within the register.
+**The second slop test: aesthetic lane.** Before committing to moves, name the reference. A Klim-style specimen page is one lane; Stripe-minimal is another; Liquid-Death-acid-maximalism is another; Apple's own product pages are yet another. Don't drift into editorial-magazine aesthetics on a brief that isn't editorial. A hiking brand with Cormorant italic drop caps has the wrong register within the register.
+
+Then the inverse test: in one sentence, describe what you're about to build the way a competitor would describe theirs. If that sentence fits the modal app in the category, restart.
 
 **The third slop test: SwiftUI tutorial smell.** If the hero surface looks like a SwiftUI tutorial screenshot, even a polished one, it's failed. A `VStack` of icon-title-subtitle cards with `cornerRadius(16)` and `.shadow(radius: 8)` is the brand-register equivalent of "AI made that." Rework the layout, not the polish.
 
@@ -34,6 +36,14 @@ SF Pro is not the brand-register answer by default. SF Pro is the product-regist
 Training-data defaults. Ban list, look further:
 
 Fraunces, Newsreader, Lora, Crimson, Crimson Pro, Crimson Text, Playfair Display, Cormorant, Cormorant Garamond, Syne, IBM Plex Mono, IBM Plex Sans, IBM Plex Serif, Space Mono, Space Grotesk, Inter, DM Sans, DM Serif Display, DM Serif Text, Outfit, Plus Jakarta Sans, Instrument Sans, Instrument Serif.
+
+### Reflex-reject aesthetic lanes
+
+Parallel to the font list. Currently saturated aesthetic families that have flooded SwiftUI brand surfaces. If a brief lands in one of these lanes without a register reason that _requires_ it (a literal magazine, a literal terminal, a literal industrial signage system), it's the second-order training reflex: the trap one tier deeper than picking a Fraunces font. Look further.
+
+- **Editorial-typographic.** Display serif (often italic) + small mono labels + ruled separators + monochromatic restraint. Klim-influenced, magazine-cover affectation. The fingerprint in SwiftUI: three `VStack`-separated sections, an italic serif headline via `Font.custom`, lowercase tracked metadata, no imagery.
+
+The reflex-reject lists apply to **new design choices**. When the existing brand has already committed to a font or a lane as part of its identity, identity-preservation wins; variants on an existing surface don't second-guess what's already shipping. The reflex-reject lists are for greenfield decisions.
 
 ### Pairing and voice
 
@@ -66,6 +76,7 @@ Brand surfaces have permission for Committed, Full palette, and Drenched strateg
 - Palette IS voice. A calm brand and a restless brand should not share palette mechanics.
 - When the strategy is Committed or Drenched, the color is load-bearing. Don't hedge with system semantic colors around the edges, commit. `.primary` and `Color(.systemBackground)` are product-register defaults, not brand-register defaults.
 - Don't converge across projects. If the last brand surface was restrained-on-cream, this one is not.
+- When a cultural-symbol palette is the obvious pull, reach past it. Let the cultural reading come from typography, imagery, and copy, not the palette.
 - Color Sets in the asset catalog still earn their place on brand surfaces, they give you free Dark Mode variants and OKLCH-tuned hex. But for hero color, hardcoded `Color(red:green:blue:)` from a deliberate OKLCH derivation is also acceptable, especially in Drenched strategies where the color itself is the brand mark.
 
 See [color and contrast](color-and-contrast.md) for OKLCH reasoning and Color Set wiring.
@@ -128,6 +139,7 @@ See [motion design](motion-design.md) for the full SwiftUI animation stack.
 - Timid palettes and average layouts. Safe = invisible.
 - Zero imagery on a brief that implies imagery (restaurant, hotel, food, travel, fashion, photography, hobbyist). Flat `Color.gray` blocks where a hero photo belongs.
 - Defaulting to editorial-magazine aesthetics (display serif + italic + drop caps + broadsheet grid) on briefs that aren't magazine-shaped. Editorial is ONE aesthetic lane, not the default brand aesthetic.
+- Repeated tiny uppercase tracked labels above every section heading. A single strong kicker can be voice; repeating it as section grammar via `.textCase(.uppercase)` with `.tracking(2)` everywhere is AI scaffolding unless it's a deliberate, named brand system.
 - Defaulting to the SwiftUI product baseline (tinted neutrals, `.systemBackground`, `List`, system semantic colors, SF Symbols at default weight) on a brand-register brief. The baseline is for product. Brand earns deviation.
 - `NavigationStack` + `List` as the brand-register shell. A marketing app is not a Settings screen.
 

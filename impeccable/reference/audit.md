@@ -1,6 +1,6 @@
 # Audit
 
-Run systematic **technical** quality checks and generate a comprehensive report. Don't fix issues: document them for other commands to address.
+Run systematic **technical** quality checks and generate a comprehensive report. Don't fix issues; document them for other commands to address.
 
 This is a code-level audit, not a design critique. Check what's measurable and verifiable in the implementation.
 
@@ -211,4 +211,4 @@ After presenting the summary, tell the user:
 - Forget to prioritize (everything cannot be P0)
 - Report detector hits as findings without confirming they are not false positives in scaffolding or test targets
 
-Remember: You are a technical quality auditor for SwiftUI. Run the detector arm first, merge its output with manual inspection, prioritize ruthlessly, and provide clear paths to improvement.
+Run the detector arm first, merge its output with manual inspection, prioritize ruthlessly, and provide clear paths to improvement.

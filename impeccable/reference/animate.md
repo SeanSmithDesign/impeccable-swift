@@ -1,6 +1,6 @@
 # Animate
 
-Analyze a feature and strategically add animations and micro-interactions that enhance understanding, provide feedback, and create delight.
+Add motion that conveys state, gives feedback, and clarifies hierarchy. Cut motion that exists only for decoration. Animation fatigue is a real cost; spend the budget on the moments that need it.
 
 > **Additional context needed**: performance constraints, target register (product vs. brand).
 
@@ -8,9 +8,9 @@ Analyze a feature and strategically add animations and micro-interactions that e
 
 ## Register
 
-**Product:** 150–250ms on most transitions. Motion conveys state: feedback, reveal, loading, transitions between views. No page-load choreography; users are in a task and won't wait for it.
+Brand: orchestrated entry sequences, staggered reveals, scroll-driven animation. Motion is part of the voice; one well-rehearsed entrance beats scattered micro-interactions. Longer orchestrated motion is appropriate for brand surfaces: landing screens, onboarding heroes, and launch moments where the user is watching, not working.
 
-**Brand:** Orchestrated entry sequences, staggered reveals, scroll-driven animation. Motion is part of the voice; one well-rehearsed entrance beats scattered micro-interactions. Longer orchestrated motion is appropriate for brand surfaces: landing screens, onboarding heroes, and launch moments where the user is watching, not working.
+Product: 150–250ms on most transitions. Motion conveys state: feedback, reveal, loading, transitions between views. No page-load choreography; users are in a task and won't wait for it.
 
 Full duration table, spring presets, and the anti-pattern catalogue live in [`motion-design.md`](motion-design.md). Cross-reference that doc for timing decisions; do not re-derive durations inline.
 
@@ -28,9 +28,9 @@ Analyze where motion would improve the experience:
    - **Missed guidance**: Opportunities to direct attention or explain behavior (onboarding, first use)
 
 2. **Understand the context**:
-   - What is the personality? (Playful vs. serious, energetic vs. calm)
-   - What is the performance budget? (Low-end device? Backgrounded? Scrolling at 120hz?)
-   - Who is the audience? (Motion-sensitive users: see Reduce Motion below: or power users who want speed?)
+   - What's the personality? (Playful vs. serious, energetic vs. calm)
+   - What's the performance budget? (Low-end device? Backgrounded? Scrolling at 120hz?)
+   - Who's the audience? (Motion-sensitive users: see Reduce Motion below; or power users who want speed?)
    - What matters most? (One hero animation vs. many micro-interactions: pick one)
 
 If any of these are unclear from the codebase, stop and call the AskUserQuestion tool to clarify.
@@ -43,10 +43,10 @@ If any of these are unclear from the codebase, stop and call the AskUserQuestion
 
 Create a purposeful animation plan before writing a single modifier:
 
-- **Hero moment**: What is the ONE signature animation? (Hero entry? Key interaction? Completion beat?)
+- **Hero moment**: What's the ONE signature animation? (Hero entry? Key interaction? Completion beat?)
 - **Feedback layer**: Which interactions need acknowledgment? (Tap, toggle, submit)
 - **Transition layer**: Which state changes need smoothing? (Reveal, collapse, navigation push)
-- **Delight layer**: Where can the experience surprise: without exhausting: the user?
+- **Delight layer**: Where can the experience surprise, without exhausting, the user?
 
 **IMPORTANT**: One well-orchestrated experience beats scattered animations everywhere. Focus on high-impact moments. Animation fatigue is real.
 
@@ -402,4 +402,4 @@ Before shipping any animated feature:
 
 ---
 
-Motion should enhance understanding and provide feedback, not add decoration. Animate with purpose, respect performance constraints, and always consider accessibility. Great animation is invisible: it just makes everything feel right.
+When the motion clarifies state instead of decorating it, hand off to `/impeccable polish` for the final pass.

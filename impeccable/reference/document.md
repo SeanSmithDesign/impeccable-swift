@@ -49,7 +49,7 @@ components:
 
 **Swift-specific token conventions:**
 
-- **Colors**: use the Color Set name from `Assets.xcassets`, never a hex literal or `Color(red:green:blue:)`. Asset Catalog Color Sets carry dark-mode variants automatically; the name is the stable identifier across both appearances. The `asset-catalog-checker` tool enumerates all Color Sets -- use its output directly.
+- **Colors**: use the Color Set name from `Assets.xcassets`, never a hex literal or `Color(red:green:blue:)`. Asset Catalog Color Sets carry dark-mode variants automatically; the name is the stable identifier across both appearances. The `asset-catalog-checker` tool enumerates all Color Sets; use its output directly.
 - **Typography `fontSize`**: use the SwiftUI semantic style name (`largeTitle`, `title`, `headline`, `body`, `callout`, `subheadline`, `footnote`, `caption`, `caption2`) instead of point values. If a custom size is used via `Font.custom(_:size:)`, record the pt value and note it as non-dynamic. `impeccable-lint` surfaces both patterns during extraction.
 - **Rounded / Spacing**: values are SwiftUI points (no `px` suffix). Match whatever scale constants the project already defines (`AppSpacing.md`, `DesignTokens.cornerRadius.card`, etc.).
 
@@ -79,14 +79,14 @@ Optional evocative subtitles are allowed in the form `## 2. Colors: The [Name] P
 - An existing `DESIGN.md` is stale (the design has drifted).
 - Before a large redesign, to capture the current state as a reference.
 
-If a `DESIGN.md` already exists, **do not silently overwrite it**. Show the user the existing file and STOP and call the AskUserQuestion tool to clarify whether to refresh, overwrite, or merge.
+If a `DESIGN.md` already exists, **do not silently overwrite it**. Show the user the existing file and stop. Call the AskUserQuestion tool to clarify whether to refresh, overwrite, or merge.
 
 ## Two paths
 
 - **Scan mode** (default): the project has design tokens, components, or Asset Catalog Color Sets. Extract, then confirm descriptive language. Use when there's code to analyze.
 - **Seed mode**: the project is pre-implementation (fresh teach, nothing built yet). Interview for five high-level answers, write a minimal DESIGN.md marked `<!-- SEED -->`. Re-run in scan mode once there's code.
 
-Decide by scanning first (Scan mode Step 1). If the scan finds no Color Sets, no Swift token files, and no SwiftUI view code, offer seed mode -- don't silently switch. `/impeccable document --seed` forces seed mode regardless of code presence.
+Decide by scanning first (Scan mode Step 1). If the scan finds no Color Sets, no Swift token files, and no SwiftUI view code, offer seed mode; don't silently switch. `/impeccable document --seed` forces seed mode regardless of code presence.
 
 ## Scan mode (auto-extract, then confirm descriptive language)
 
@@ -122,7 +122,7 @@ Search the Swift project in priority order:
 
 Build a structured draft from the discovered assets. For each token class:
 
-**Colors**: Use `asset-catalog-checker` output as the authoritative color inventory. The tool lists every Color Set by name. Group by semantic role rather than hue order:
+**Colors**: Use `asset-catalog-checker` output as the authoritative color inventory. It lists every Color Set by name. Group by semantic role rather than hue order:
 
 - **Primary / Accent**: the tint color (`AccentColor` Color Set, or a named brand accent). Note whether the Color Set provides a dark-mode variant.
 - **Background / Surface**: background Color Sets (`Background`, `SurfacePrimary`, `SurfaceSecondary`, `GroupedBackground`). On iOS 26+ with Liquid Glass, record which surfaces are glass vs. tonal fill.
@@ -133,8 +133,8 @@ For dark-mode coverage: every Color Set flagged by `asset-catalog-checker` as mi
 
 **Typography**: `impeccable-lint` output includes two categories:
 
-- `Font.custom(_:size:)` calls -- record the font family name, the point size, and whether the size is a constant (tokenized) or a literal (hardcoded). Group by family and weight.
-- `.font(.system(size:weight:design:))` calls -- these are fixed-size system font uses. Compare against [`typography.md`](typography.md): any that replaces a semantic style (`.body`, `.headline`, etc.) with a numeric size is a Dynamic Type gap.
+- `Font.custom(_:size:)` calls: record the font family name, the point size, and whether the size is a constant (tokenized) or a literal (hardcoded). Group by family and weight.
+- `.font(.system(size:weight:design:))` calls: fixed-size system font uses. Compare against [`typography.md`](typography.md): any that replaces a semantic style (`.body`, `.headline`, etc.) with a numeric size is a Dynamic Type gap.
 
 Map observed roles to the Material hierarchy: display / headline / title / body / label. A project using `Font.custom("NewYork-Regular", size: 34)` for hero text maps to the `display` role.
 
@@ -537,15 +537,15 @@ Seed mode writes a minimal frontmatter with `name` and `description` only -- no 
 
 ## Style guidelines
 
-- **Frontmatter first, prose second.** Tokens go in YAML; prose contextualizes them. Don't redefine a token value in two places -- the frontmatter is normative.
+- **Frontmatter first, prose second.** Tokens go in the YAML frontmatter; prose contextualizes them. Don't redefine a token value in two places; the frontmatter is normative.
 - **Color Set names over hex everywhere.** The color's meaning is in the Color Set name; the hex is an implementation detail that changes across appearances. Use the name.
 - **Cite PRODUCT.md anti-references by name** in the Do's and Don'ts section. If PRODUCT.md lists "SaaS dashboard defaults" or "AI tool template look" as anti-references, the DESIGN.md Don'ts should repeat those phrases verbatim so the visual spec enforces the strategic line.
-- **Match the spec, don't invent new sections.** The six section names are fixed. Layout, motion, responsive content fold into Overview (philosophy-level) or Components (per-component behavior).
+- **Match the spec, don't invent new sections.** The six section names are fixed. If you have Layout/Motion/Responsive content, fold it into Overview (philosophy-level rules) or Components (per-component behavior).
 - **Descriptive over technical**: "Gently curved edges (16pt radius)" not "rounded-lg". Include the technical value in parens; lead with the description.
 - **Functional over decorative**: for each token, explain WHERE and WHY it's used, not just WHAT it is.
-- **Exact values in parens**: Color Set names, pt values, font weights -- always the precise value alongside the description.
+- **Exact values in parens**: Color Set names, pt values, font weights; always the precise value alongside the description.
 - **Use Named Rules**: `**The [Name] Rule.** [short doctrine]`. These are memorable, citable, and much stickier for AI consumers than bullet lists. Aim for 1-3 per section.
-- **Be forceful.** The voice of a design director. "Prohibited", "forbidden", "never", "always" -- not "consider", "might", "prefer".
+- **Be forceful.** The voice of a design director. "Prohibited", "forbidden", "never", "always", not "consider", "might", "prefer".
 - **Concrete anti-pattern tests.** A one-sentence audit test beats a paragraph of principle. "If a text view breaks at AX5, the font call is not using a semantic text style."
 - **Reference PRODUCT.md.** The anti-references section of PRODUCT.md should directly inform the Do's and Don'ts. Quote or paraphrase.
 - **Group colors by role**, not by hue order. Primary / Background / Label / Semantic is the ordering.

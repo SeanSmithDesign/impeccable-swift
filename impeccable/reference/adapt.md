@@ -132,7 +132,7 @@ Platform idioms are distinct from size classes. An iPad in Split View has compac
 
 - Design entirely in `.compact` horizontal. No split view, no sidebar.
 - Single-column `NavigationStack` or `TabView` is the correct root.
-- Safe areas are the layout constraint : never hardcode top/bottom insets.
+- Safe areas are the layout constraint; never hardcode top/bottom insets.
 
 ### iPhone + iPad Universal
 
@@ -155,7 +155,7 @@ iPad can be placed in three distinct multitasking configurations simultaneously.
 
 **Rule:** Design for 320pt as the minimum viable width on iPad. Slide Over is always 320pt and it is a legitimate use case, not an edge case.
 
-**Stage Manager note:** On iPadOS 16+ and macOS Sonoma+, windows can be any arbitrary size within the display. Size classes remain the correct signal. If a layout must impose constraints, use `frame(minWidth:minHeight:)` on the root view : do not assume full-screen.
+**Stage Manager note:** On iPadOS 16+ and macOS Sonoma+, windows can be any arbitrary size within the display. Size classes remain the correct signal. If a layout must impose constraints, use `frame(minWidth:minHeight:)` on the root view; do not assume full-screen.
 
 ### Mac Native (SwiftUI native target)
 
@@ -188,7 +188,7 @@ Single-column only. Digital Crown scrolling replaces scroll gestures. Complicati
 
 ### visionOS
 
-Volumes and ornaments replace fixed windows. `NavigationSplitView` is the standard structure for app content. Ornaments host secondary controls floating beside the main window : use `.ornament(attachmentAnchor:)`. Hover is replaced by eye tracking gaze; interactive elements must be large enough to target with gaze (44pt remains the floor).
+Volumes and ornaments replace fixed windows. `NavigationSplitView` is the standard structure for app content. Ornaments host secondary controls floating beside the main window; use `.ornament(attachmentAnchor:)`. Hover is replaced by eye tracking gaze; interactive elements must be large enough to target with gaze (44pt remains the floor).
 
 ---
 
@@ -213,7 +213,7 @@ Button(action: dismiss) {
 .contentShape(Rectangle())
 ```
 
-**Rule:** If the visual affordance is smaller than the tap area, pad with transparent content shape : never shrink the tap area to match the visual.
+**Rule:** If the visual affordance is smaller than the tap area, pad with transparent content shape; never shrink the tap area to match the visual.
 
 ---
 
@@ -308,5 +308,5 @@ There is no automated `impeccable-lint` rule for adaptive layout. Adaptation cor
 - Assume iPad means regular width. Split View and Slide Over deliver compact.
 - Disable multitasking (`UIRequiresFullScreen`) without documenting why and verifying it is truly incompatible.
 - Ship a Mac build with 44pt tap targets and sheet-as-default presentation. See [`ios-vs-macos.md`](ios-vs-macos.md) for what Mac users expect instead.
-- Hide core functionality conditionally on size class. If a feature matters, adapt it : don't remove it.
-- Assume landscape is edge-case. iPhone landscape is `.compact` vertical and `.regular` horizontal : a common configuration that many users prefer for media and reading.
+- Hide core functionality conditionally on size class. If a feature matters, adapt it; don't remove it.
+- Assume landscape is edge-case. iPhone landscape is `.compact` vertical and `.regular` horizontal, a common configuration that many users prefer for media and reading.

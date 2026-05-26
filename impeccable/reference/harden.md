@@ -1,6 +1,6 @@
 # Harden
 
-Strengthen SwiftUI interfaces against edge cases, errors, internationalization issues, and real-world usage scenarios that break idealized designs. Hardening is what turns a screenshot-perfect Preview into something that survives Brazilian Portuguese, an iPhone SE in airplane mode, and a user with AX5 Dynamic Type.
+Designs that only work with perfect data aren't production-ready. Harden the interface against the inputs, errors, languages, and network conditions that real users will throw at it. This is what turns a screenshot-perfect Preview into something that survives Brazilian Portuguese, an iPhone SE in airplane mode, and a user with AX5 Dynamic Type.
 
 ## Assess Hardening Needs
 
@@ -32,7 +32,7 @@ Identify weaknesses and edge cases:
    - Currency symbols and placement (prefix vs suffix)
    - Plural rules (zero, one, two, few, many, other)
 
-**CRITICAL**: Designs that only work with perfect data aren't production-ready. Harden against reality, not against your favorite Preview fixture.
+**CRITICAL**: Harden against reality, not against your favorite Preview fixture.
 
 ## Hardening Dimensions
 
@@ -663,7 +663,7 @@ func fetchWithRetry<T>(
 - UI tests for critical flows (sign-in, checkout, content creation).
 - Accessibility audit via Xcode's Accessibility Inspector before each release.
 
-**IMPORTANT**: Hardening is about expecting the unexpected. Real users will do things you never imagined.
+Hardening is about expecting the unexpected. Real users will do things you never imagined.
 
 **NEVER**:
 
@@ -695,7 +695,7 @@ Test thoroughly with edge cases:
 - **Empty**: blank data store, no permissions, no items.
 - **Cancellation**: navigate away mid-load, mid-search, mid-upload.
 
-Remember: you're hardening for production reality, not Preview perfection. Expect users to input weird data, lose connection mid-flow, run AX5, switch to Arabic, and use your product in ways you never imagined. Build resilience into every view, every async function, every state machine.
+You're hardening for production reality, not Preview perfection. Expect users to input weird data, lose connection mid-flow, run AX5, switch to Arabic, and use your product in ways you never imagined. Build resilience into every view, every async function, every state machine.
 
 ## Cross-references
 

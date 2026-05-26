@@ -1,10 +1,10 @@
 # Cognitive Load
 
-Cognitive load is the total mental effort required to use an interface. Overloaded users tap the wrong thing, abandon the flow, and never come back. This reference is a critique-supporting framework: use it to name what's wrong when a screen "feels heavy," and to score how heavy it actually is.
+Cognitive load is the total mental effort required to use an interface. Overloaded users tap the wrong thing, abandon the flow, and never come back. Use this doc to name what's wrong when a screen "feels heavy," and to score how heavy it actually is.
 
-The principles are platform-agnostic (Hick's Law, Miller's Number, decision fatigue, progressive disclosure are universal). The remedies in this doc are SwiftUI-shaped: `Menu`, `Picker`, `DisclosureGroup`, `NavigationSplitView`, sheet stacking, `.controlSize`, and the system controls that already do the right thing if you let them.
+The principles are platform-agnostic (Hick's Law, Miller's Number, decision fatigue, progressive disclosure are universal). The remedies are SwiftUI-shaped: `Menu`, `Picker`, `DisclosureGroup`, `NavigationSplitView`, sheet stacking, `.controlSize`, and the system controls that already do the right thing if you let them.
 
-For the structural side of cognitive load (how an app is laid out across stacks, splits, and tabs), see [`navigation.md`](navigation.md). For cognitive accessibility: Reduce Motion, VoiceOver verbosity, and the working-memory cost of a screen for users who already have a high baseline load: see [`accessibility.md`](accessibility.md).
+For the structural side of cognitive load (how an app is laid out across stacks, splits, and tabs), see [`navigation.md`](navigation.md). For cognitive accessibility, including Reduce Motion, VoiceOver verbosity, and the working-memory cost of a screen for users who already have a high baseline load, see [`accessibility.md`](accessibility.md).
 
 ## Three Types of Cognitive Load
 
@@ -21,7 +21,7 @@ The complexity inherent to what the user is trying to do. Configuring a backup d
 
 ### Extraneous Load: Bad Design
 
-Mental effort caused by the interface itself, not the task. **Eliminate this ruthlessly.** It is pure waste. Every unit of extraneous load you remove is bandwidth the user can spend on intrinsic load (the actual job) or germane load (learning your app).
+Mental effort caused by the interface itself, not the task. **Eliminate this ruthlessly.** It's pure waste. Every unit of extraneous load you remove is bandwidth the user can spend on intrinsic load (the actual job) or germane load (learning your app).
 
 **Common sources:**
 
@@ -33,7 +33,7 @@ Mental effort caused by the interface itself, not the task. **Eliminate this rut
 
 ### Germane Load: Learning Effort
 
-Mental effort spent building understanding of the app. This is the _good_ kind of cognitive load. It pays off as mastery: the user gets faster every session.
+Mental effort spent building understanding of the app. This is the _good_ kind of cognitive load. It pays off as mastery; the user gets faster every session.
 
 **Support it by:**
 

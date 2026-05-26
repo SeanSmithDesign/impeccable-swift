@@ -1,6 +1,6 @@
 # bolder
 
-Increase visual impact and personality in SwiftUI interfaces that are too safe, generic, or visually underwhelming, creating more engaging and memorable experiences.
+When asked for "bolder," AI defaults to the same tired tricks: cyan/purple gradients, glassmorphism on every surface, neon accents on dark backgrounds, gradient text on metric cards. These are the opposite of bold. Reject them first, then increase visual impact and personality through stronger hierarchy, committed scale, and decisive type.
 
 ---
 
@@ -25,16 +25,16 @@ Analyze what makes the interface feel too safe or boring:
    - **Flat hierarchy**: Nothing stands out or commands attention
 
 2. **Understand the context**:
-   - What is the brand personality? (How far can we push?)
-   - What is the purpose? (Marketing views can be bolder than financial dashboards)
-   - Who is the audience? (What will resonate?)
+   - What's the brand personality? (How far can we push?)
+   - What's the purpose? (Marketing views can be bolder than financial dashboards)
+   - Who's the audience? (What will resonate?)
    - What are the constraints? (Brand guidelines, accessibility, Dynamic Type compliance)
 
 If any of these are unclear from the codebase, STOP and call the AskUserQuestion tool to clarify.
 
 **CRITICAL**: "Bolder" does not mean chaotic or garish. It means distinctive, memorable, and confident. Think intentional drama, not random chaos.
 
-**WARNING: AI SLOP TRAP**: When making things "bolder," AI defaults to the same tired tricks: cyan/purple gradients, fake glassmorphism on every surface, neon accents on dark backgrounds, gradient text on metric cards. These are the OPPOSITE of bold. They are generic. Review ALL the DON'T guidelines from the parent impeccable skill before proceeding. Bold means distinctive, not "more effects."
+**WARNING: AI SLOP TRAP**: Review ALL the DON'T guidelines from the parent impeccable skill before proceeding. Bold means distinctive, not "more effects."
 
 ---
 
@@ -43,7 +43,7 @@ If any of these are unclear from the codebase, STOP and call the AskUserQuestion
 Create a strategy to increase impact while maintaining coherence:
 
 - **Focal point**: What should be the hero moment? (Pick ONE, make it amazing)
-- **Personality direction**: Maximalist energy? Elegant drama? Playful weight? Dark and moody? Choose a lane.
+- **Personality direction**: Maximalist chaos? Elegant drama? Playful energy? Dark and moody? Choose a lane.
 - **Risk budget**: How experimental can we be? Push boundaries within constraints.
 - **Hierarchy amplification**: Make big things BIGGER, small things smaller (increase contrast)
 
@@ -224,4 +224,4 @@ Ensure amplification maintains usability and coherence:
 
 ---
 
-Remember: Bold design is confident design. It takes risks, makes statements, and creates memorable experiences. But bold without strategy is just loud. Be intentional, be dramatic, be unforgettable.
+When the result feels right, hand off to `/impeccable polish` for the final pass.

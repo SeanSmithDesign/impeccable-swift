@@ -1,10 +1,10 @@
 > **Additional context needed**: the "aha moment" you want users to reach, and users' experience level.
 
-Create or improve onboarding experiences that help users understand, adopt, and succeed with the product quickly.
+Get users to first value as fast as possible. Onboarding's job is not to teach the product. Its job is to get people to the moment that proves the product is worth their time.
 
 ## Assess Onboarding Needs
 
-Understand what users need to learn and why:
+Understand what users need to learn and why before writing any code:
 
 1. **Identify the challenge**:
    - What are users trying to accomplish?
@@ -27,68 +27,55 @@ Understand what users need to learn and why:
 
 ## Onboarding Principles
 
-Follow these core principles:
-
 ### Show, Don't Tell
-
 - Demonstrate with working examples, not just descriptions
 - Provide real functionality in onboarding, not separate tutorial mode
 - Use progressive disclosure, teach one thing at a time
 
 ### Make It Optional (When Possible)
-
 - Let experienced users skip onboarding
 - Don't block access to product
 - Provide "Skip" or "I'll explore on my own" options
 
 ### Time to Value
-
 - Get users to their "aha moment" ASAP
 - Front-load most important concepts
 - Teach 20% that delivers 80% of value
 - Save advanced features for contextual discovery
 
 ### Context Over Ceremony
-
 - Teach features when users need them, not upfront
 - Empty states are onboarding opportunities
 - Tooltips and hints at point of use
 
 ### Respect User Intelligence
-
 - Don't patronize or over-explain
 - Be concise and clear
 - Assume users can figure out standard patterns
 
 ## Design Onboarding Experiences
 
-Create appropriate onboarding for the context:
-
 ### Initial Product Onboarding
 
 **Welcome Screen**:
-
 - Clear value proposition (what is this product?)
 - What users will learn/accomplish
 - Time estimate (honest about commitment)
 - Option to skip (for experienced users)
 
 **Account Setup**:
-
 - Minimal required information (collect more later)
 - Explain why you're asking for each piece of information
 - Smart defaults where possible
 - Sign in with Apple when appropriate
 
 **Core Concept Introduction**:
-
 - Introduce 1-3 core concepts (not everything)
 - Use simple language and examples
 - Interactive when possible (do, don't just read)
 - Progress indication (step 1 of 3)
 
 **First Success**:
-
 - Guide users to accomplish something real
 - Pre-populated examples or templates
 - Celebrate completion (but don't overdo it)
@@ -208,7 +195,6 @@ For modal presentation styling: materials, corner radius, and shadow choices for
 
 **Empty States**:
 Instead of blank space, show:
-
 - What will appear here (description + illustration or SF Symbol)
 - Why it's valuable
 - Clear CTA to create first item
@@ -243,7 +229,6 @@ struct ProjectListView: View {
 ```
 
 **Contextual Tooltips**:
-
 - Appear at relevant moment (first time user sees feature)
 - Point directly at relevant UI element
 - Brief explanation plus benefit
@@ -251,14 +236,12 @@ struct ProjectListView: View {
 - Optional "Learn more" link
 
 **Feature Announcements**:
-
 - Highlight new features when they're released
 - Show what's new and why it matters
 - Let users try immediately
 - Dismissable
 
 **Progressive Onboarding**:
-
 - Teach features when users encounter them
 - Badges or indicators on new/unused features
 - Unlock complexity gradually (don't show all options immediately)
@@ -266,13 +249,11 @@ struct ProjectListView: View {
 ### Guided Tours and Walkthroughs
 
 **When to use**:
-
 - Complex interfaces with many features
 - Significant changes to existing product
 - Industry-specific tools needing domain knowledge
 
 **How to design**:
-
 - Spotlight specific UI elements (dim rest of interface)
 - Keep steps short (3-7 steps max per tour)
 - Allow users to move through the tour freely
@@ -280,7 +261,6 @@ struct ProjectListView: View {
 - Make replayable (help menu)
 
 **Best practices**:
-
 - Interactive over passive (let users tap real controls)
 - Focus on workflow, not features ("Create a project" not "This is the project button")
 - Provide sample data so actions work
@@ -288,13 +268,11 @@ struct ProjectListView: View {
 ### Interactive Tutorials
 
 **When to use**:
-
 - Users need hands-on practice
 - Concepts are complex or unfamiliar
 - High stakes (better to practice in safe environment)
 
 **How to design**:
-
 - Sandbox environment with sample data
 - Clear objectives ("Create a chart showing sales by region")
 - Step-by-step guidance
@@ -304,14 +282,12 @@ struct ProjectListView: View {
 ### Documentation and Help
 
 **In-product help**:
-
 - Contextual help links throughout interface
 - Keyboard shortcut reference (Mac)
 - Searchable help content
 - Video tutorials for complex workflows
 
 **Help patterns**:
-
 - `?` icon near complex features
 - "Learn more" links in contextual overlays
 - Keyboard shortcut hints shown inline on Mac
@@ -320,28 +296,17 @@ struct ProjectListView: View {
 
 Every empty state needs:
 
-### What Will Be Here
+**What Will Be Here**: "Your recent projects will appear here"
 
-"Your recent projects will appear here"
+**Why It Matters**: "Projects help you organize your work and collaborate with your team"
 
-### Why It Matters
+**How to Get Started**: [Create project] or [Import from template]
 
-"Projects help you organize your work and collaborate with your team"
+**Visual Interest**: SF Symbol or illustration (not just text on a blank background)
 
-### How to Get Started
-
-[Create project] or [Import from template]
-
-### Visual Interest
-
-SF Symbol or illustration (not just text on blank background)
-
-### Contextual Help
-
-"Need help getting started? [Watch 2-min tutorial]"
+**Contextual Help**: "Need help getting started? [Watch 2-min tutorial]"
 
 **Empty state types**:
-
 - **First use**: Never used this feature (emphasize value, provide template)
 - **User cleared**: Intentionally deleted everything (light touch, easy to recreate)
 - **No results**: Search or filter returned nothing (suggest different query, clear filters)
@@ -349,8 +314,6 @@ SF Symbol or illustration (not just text on blank background)
 - **Error state**: Failed to load (explain what happened, retry option)
 
 ## Implementation Patterns
-
-### SwiftUI approaches:
 
 **Tooltip overlays**: Custom `ZStack` overlays with `matchedGeometryEffect` to anchor to the target view.
 **Tour sequences**: `fullScreenCover` or overlay with dimmed background and spotlight cutout using `.blendMode(.destinationOut)`.
@@ -390,4 +353,4 @@ Test with real users:
 - **Completion rate**: Are users completing? (If low, simplify)
 - **Time to value**: How long until users get first value?
 
-Remember: You're a product educator with excellent teaching instincts. Get users to their "aha moment" as quickly as possible. Teach the essential, make it contextual, respect user time and intelligence.
+When users hit the aha moment fast and don't drop off, hand off to `impeccable polish` for the final pass.

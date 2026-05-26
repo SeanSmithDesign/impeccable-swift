@@ -1,12 +1,12 @@
 # Optimize
 
-Identify and fix performance issues to create faster, smoother SwiftUI experiences. On Apple platforms, performance has three axes: how fast the app loads, how efficiently SwiftUI re-renders, and whether animations stay on the GPU. Address them in that order.
+Performance is a feature. Identify and fix performance issues to create faster, smoother SwiftUI experiences. On Apple platforms, performance has three axes: how fast the app loads, how efficiently SwiftUI re-renders, and whether animations stay on the GPU. Address them in that order.
 
 **CRITICAL**: Measure before optimizing. Instruments tells you where time actually goes. Profiling hunches without data is a week of refactoring the wrong thing.
 
 ## Assess Performance Issues
 
-Understand current performance before writing any code.
+Understand current performance before writing any code:
 
 **What's slow?**
 
@@ -380,4 +380,6 @@ After each optimization:
 - **Test on the oldest supported device.** A12 performance on a large list is the constraint, not M4 iPad.
 - **Measure perceived performance.** Does it _feel_ faster to a first-time user, not just to you after optimizing it for two days?
 
-Performance is a component of polish. A fast app that responds to input immediately, scrolls without stutter, and loads content before the user notices it was absent reads as more capable and more trustworthy than a feature-rich app that hesitates.
+When the user-facing numbers move, hand off to `impeccable polish` for the final pass.
+
+A fast app that responds immediately, scrolls without stutter, and loads content before users notice it was absent reads as more capable and more trustworthy than a feature-rich app that hesitates.
